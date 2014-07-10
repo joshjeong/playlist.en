@@ -4,7 +4,6 @@ end
 
 
 post '/room' do
-	p params[:name]
 	if Room.where('name = ?', params[:name]).empty?
 		# if room does not exist, create a room and playlist, join as admin
 		get_client
@@ -13,7 +12,6 @@ post '/room' do
 		@new_room = Room.create(name: params[:name], playlist_id: @playlist_id)
 		session[:playlist_id] = @new_room.playlist_id
 		current_room
-		# redirect "/room/#{@current_room.first.playlist_id}/host"
 		redirect '/first_search'
 	else
 		@playlist_id = Room.where('name = ?', params[:name]).first.playlist_id
@@ -28,12 +26,12 @@ get '/room/:playlist_id/:host' do
 	if params[:host] == 'host'
 		current_room
 		get_client
-		# @reply = session[:reply]
 		# @playlist_id = @current_room.first.playlist_id
-		p session[:video_id]
 		@client.add_video_to_playlist(session[:playlist_id], session[:video_id] )
 		@playlist_videos = @client.playlist(session[:playlist_id]).videos
 		@host = true
+		@playlist_id = params[:playlist_id]
+		# session.clear
 		erb :room
 	elsif params[:host] == 'guest'
 		current_room
@@ -90,13 +88,7 @@ get '/signout' do
 	redirect '/'
 end
 
-get '/test' do
-	erb :test
-end
 
-get '/test/playlist' do
-	return 'PLK3hPkA_D_Z4xJiIgq5fxhFysyyzsrkPG'
-end
 
 
 

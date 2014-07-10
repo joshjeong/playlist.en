@@ -9,7 +9,10 @@
 <!-- "https://www.youtube.com/v/M7lc1UVf-VE?controls=0&rel=0&showinfo=0&autohide=1&version=3" -->
 
 	<% if @host == true %>
-			<div id="ytplayer"></div>
+		<div class = "start_youtube">
+  	</div>
+
+			<div id="player"></div>
 		<% end %>
 
 
@@ -57,3 +60,40 @@
 	</div>
 
 </div>
+
+		<script>
+	     //Load player api asynchronously.
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    var done = false;
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '390',
+          width: '640',
+					playerVars:
+						{
+	  					listType:'playlist',
+	  					list: "<%= @playlist_id %>"
+	  				},
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+          }
+        });
+    }
+    function onPlayerReady(evt) {
+        evt.target.playVideo();
+    }
+    function onPlayerStateChange(evt) {
+        if (evt.data == YT.PlayerState.PLAYING && !done) {
+            setTimeout(stopVideo, 6000);
+            done = true;
+        }
+    }
+    function stopVideo() {
+        player.stopVideo();
+    }
+  </script>
