@@ -1,0 +1,317 @@
+/*HOMEPAGE*/
+
+
+body {
+	background: url('http://wallpapers.ghlk.net/2t2bW.jpg') no-repeat center center fixed;
+	background-size: cover;
+}
+
+h1 {
+	color: white;
+	margin: auto;
+	text-align: center;
+	/*margin-top: 10%;*/
+	font-size: 4em;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: bolder;
+}
+
+.text_container {
+	position: absolute;
+	margin-top: 5rem;
+	width: 100%;
+}
+
+#blurb {
+	position: relative;
+	top: 4rem;
+	color: white;
+	margin: auto;
+	text-align: center;
+	font-size: 17px;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 500;
+}
+
+#join_button {
+	margin: 5px auto 0px auto;
+	height: 35px;
+	text-align: center;
+	background-color: #4bb9e5;
+	border-radius: 2px;	
+	width: 100%;
+	padding-top: 13px;
+	padding-right: 2px;
+}
+
+#join_button input {
+	border: 0;
+	background: none;
+	color: white;
+	text-decoration: none;
+	font-size: 1rem;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+#join_button:active  {
+	background-color: #3e98bc;
+}
+
+.field_container {
+	position: absolute;
+	width: 100%;
+	height: 10rem;
+	margin-top: 15rem;
+}
+
+.container {
+	width: 16em;
+	margin: auto;
+}
+
+.fields {
+	margin-top: 15rem;
+	width: 16rem;
+	margin: auto;
+
+}
+
+.input_field {
+	display: block;
+	height: 50px;
+  width: 100%;
+	border: none;
+	font-size: 18px;
+	font-weight: lighter;
+	/*padding-left: 8px;*/
+	text-align: center;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+
+
+/*YOUTUBE*/
+
+#youtube_background {
+	z-index: -99;
+	width: 100%;
+	height: 100%;
+}
+
+
+iframe {
+	frameborder: 0;
+	padding: 0;
+	margin: 0;
+	border: none;
+	width: 100%;
+	height: 100%;
+}
+
+iframe[seamless]{
+    background-color: transparent;
+    border: 0px none transparent;
+    padding: 0px;
+    overflow: hidden;
+}
+
+
+
+/*SIGNOUT*/
+.signout {
+	position: absolute;
+	top: 0;
+	right: 25rem;
+	color: white;
+}
+
+/*YOUTUBE queue*/
+
+#toggle_button {
+	position: absolute;
+	top: 0;
+	right: 20.5rem;
+	color: white;
+}
+
+#sidebar {
+	position: absolute;
+	top: 0;
+	right: -21rem; 
+	border: 2px solid black;
+	border-radius: 0.5rem;
+	width: 20rem;
+	max-height: 90%;
+	overflow: scroll;
+}
+
+#hide_sidebar {
+	overflow: hidden;
+}
+
+.queue_container {
+	height: 6rem;
+	padding: 0.5rem;
+	overflow: scroll;
+	border-bottom: 1px solid black;
+	background-color: white;
+	opacity: 0.6;
+}
+
+.queue_container:hover {
+	opacity: 1;
+}
+
+
+.queue_right {
+	float: right;
+	width: 11rem;
+}
+
+.sidebar_thumbnail {
+	float: left;
+	width: 8rem;
+}
+
+.sidebar_thumbnail img {
+	box-shadow: 2px 2px 1px rgba(50, 50, 50, 0.75);
+}
+
+
+.queue_title {
+	color: black;
+	font-size: 1rem;
+	width: 100%;
+	padding-top: 1rem;
+}
+
+.youtube_thumbnail {
+	margin: auto;
+}
+
+
+/*SEARCH Area*/
+.bottom_half {
+	width: 50rem;
+	background-color: rgba(0,0,0,0.85);
+	margin: auto;
+	padding: 1rem;
+	position: relative;
+	margin-top: 7rem;
+	border-radius: 0.5rem;
+}
+
+
+#search_container {
+	position: relative;
+	background-color: white;
+	opacity: 30%;
+	height: 30px;
+	width: 200px;
+	margin: auto;
+	padding-left: 20px;
+	padding-right: 40px;
+	border-radius: 15px;
+	opacity: 0.5;
+}
+
+#search_field, #first_search {
+	text-decoration: none;
+	font-size: 14px;
+	font-family: helvetica;
+	font-weight: bold;
+	color: grey; 
+	position: relative;
+	padding-top: 0.5rem;
+	float: right;
+	border: none;
+	text-align: center;
+}
+
+#search_field:focus, #first_search:focus {
+	outline: none;
+}
+
+#search_container:hover {
+	background-color: white;
+	opacity: 1;
+}
+
+#mag_glass {
+	height: 20px;
+	width: auto;
+	position: relative;
+	margin-top: 0.5rem;
+	float: left;
+}
+
+#room_page { 
+	background: url('../images/concert.jpg') no-repeat center center fixed;
+	background-size: cover;
+	overflow: hidden;
+	width: 100%;
+	padding-bottom: 3rem;
+}
+
+.result_container {
+	background-color: #888488;
+	width: 100%;
+}
+
+.search_area {
+	margin-top: 1rem;
+	height: 43rem;
+	padding: 2rem;
+	overflow: scroll;
+}
+
+.search_title {
+	display: inline;
+}
+
+.div_thumbnail {
+	display: inline;
+	box-shadow: 2px 2px 1px rgba(50, 50, 50, 0.75);
+	width: 8rem;
+	margin: auto;
+}
+
+.result_left {
+	width: 50%;
+	float: left;
+}
+
+.result_right {
+	width: 50%;
+	float: right;
+}
+
+.search_block {
+	padding-bottom: 1rem;
+	border-radius: 0.5rem;
+}
+
+.search_block:hover {
+	background-color: rgba(255,255,255,0.7)
+}
+
+
+/*First song*/
+
+.move_first_container {
+	position: absolute;
+	width: 100%;
+}
+
+.first_song_container {
+	position: relative;
+	background-color: pink;
+	width: 40rem;
+	margin: auto;
+}
+
+.first_search_area {
+	position: absolute;	
+	width: 100%;
+	margin-top: 23rem;
+}
