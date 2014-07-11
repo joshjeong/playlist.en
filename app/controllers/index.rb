@@ -9,32 +9,36 @@ post '/room' do
 		get_client
 		@playlist = @client.add_playlist(:title => params[:name], :description => "Music Room")
 		@playlist_id = @playlist.playlist_id
-		@new_room = Room.create(name: params[:name], playlist_id: @playlist_id)
-		session[:playlist_id] = @new_room.playlist_id
+		@new_room = Room.create(name: params[:name])
+		session[:name] = params[:name]
+		p 'in /room'
+		p session[:name]
 		current_room
 		redirect '/first_search'
 	else
-		@playlist_id = Room.where('name = ?', params[:name]).first.playlist_id
+		@name = Room.where('name = ?', params[:name]).first
+		p @name
 		host = 'guest'
-		redirect "/room/#{@playlist_id}/#{host}"
+		redirect "/room/#{@name.name}/#{host}"
 	end
 				
 end
 
 
-get '/room/:playlist_id/:host' do
+get '/room/:video_id/:host' do
 	if params[:host] == 'host'
 		current_room
 		get_client
 		# @client.add_video_to_playlist(session[:playlist_id], session[:video_id] )
-		@playlist_videos = @client.playlist(session[:playlist_id]).videos
+		# @playlist_videos = @client.playlist(session[:playlist_id]).videos
 		@host = true
-		@playlist_id = params[:playlist_id]
+		# @playlist_id = params[:playlist_id]
+		@video_id = params[:video_id]
 		erb :room
 	elsif params[:host] == 'guest'
 		current_room
 		get_client
-		@playlist_videos = @client.playlist(params[:playlist_id]).videos
+		# @playlist_videos = @client.playlist(params[:playlist_id]).videos
 		@host = false
 		erb :room
 	end
@@ -50,17 +54,22 @@ post '/first_search/results' do
 	current_room
 	reply1 = @client.videos_by(:query => params[:first_search], :page => 1, :per_page => 5, :most_viewed => true)
 	reply2 = @client.videos_by(:query => params[:first_search], :page => 2, :per_page => 5, :most_viewed => true)
-	@playlist_id = session[:playlist_id]
-	erb :first_song, locals: {reply1: reply1, reply2: reply2, playlist_id: @playlist_id}, layout: false
+	# @playlist_id = session[:playlist_id]
+	erb :first_song, locals: {reply1: reply1, reply2: reply2}, layout: false
 	# @client.add_video_to_playlist(session[:playlist_id], params[:search])
 end
 
 get '/first_search/results/:video_id' do
 	get_client
-	@playlist_id = session[:playlist_id]
-	@client.add_video_to_playlist(@playlist_id, params[:video_id])
+	current_room
+	# @playlist_id = session[:playlist_id]
+	# @client.add_video_to_playlist(@playlist_id, params[:video_id])	
+	p 'before first number of songs'
+	@current_room.first.songs.create(video_id: params[:video_id])
+	p 'after add number of songs'
 	session[:video_id] = params[:video_id]
-	redirect "/room/#{@playlist_id}/host"
+	@video_id = params[:video_id]
+	redirect "/room/#{@video_id}/host"
 end
 
 
@@ -77,17 +86,39 @@ end
 post '/add' do
 	current_room
 	get_client
-	@client.add_video_to_playlist(session[:playlist_id], params[:addVideo])
-	@allVideos = @client.playlist(session[:playlist_id])
+	# @client.add_video_to_playlist(session[:playlist_id], params[:addVideo])
+	@current_room.first.songs.create(video_id: params[:addVideo])
+	# @allVideos = @client.playlist(session[:playlist_id])
 	video = @client.video_by(params[:addVideo])
-	erb :new_song, locals: {video: video}, layout: false
+	video_id = params[:addVideo]
+	erb :new_song, locals: {video: video, video_id: video_id}, layout: false
 end
 
-get '/signout' do
+post '/signout' do
 	session.clear
 	redirect '/'
 end
 
+post '/playlist' do
+	get_client
+	current_room
+	if @current_room.first.songs.count > 0
+		next_song = @current_room.first.songs.first.destroy
+		content_type 'json'
+		return {queue: next_song.video_id}.to_json
+	else
+	  p "nothing in playlist"
+	end
+end
+
+# post '/new_song' do
+# 	get_client
+# 	current_room
+	# @playlist_id = session[:playlist_id]
+	# @client.add_video_to_playlist(@playlist_id, params[:video_id])	
+# 	@current_room.first.songs.create(video_id: params[:video_id])
+# 	session[:video_id] = params[:video_id]
+# end
 
 
 

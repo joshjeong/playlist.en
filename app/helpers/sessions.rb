@@ -1,8 +1,8 @@
 helpers do 	
 
  	def current_room
-		if session[:playlist_id]
-			@current_room ||= Room.where('playlist_id = ?', session[:playlist_id])
+		if session[:name]
+			@current_room ||= Room.where('name = ?', session[:name])
 		end
 	end
 

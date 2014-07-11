@@ -59,7 +59,6 @@ function searchFirstSong() {
 function addListener() {
   $('.search_area').on('click', '.result_thumbnail', function(e) {
     e.preventDefault();
-    console.log($(this).parents('a').attr('href'));
     addQueue($(this));
   })
 }
@@ -99,15 +98,58 @@ function createFirstSearch(button) {
 
 
 function addQueue(button) {
+  var videoId= button.parents('a').attr('href');
   $.ajax({
     type: "post",
     url: '/add',
-    data: {addVideo: button.parents('a').attr('href')}
+    data: {addVideo: videoId}
   }).done(function(response) {
     $('.add_queue').append(response);
     $("html, body").animate({ scrollTop: 0 }, "slow");
+    // addToQueue(videoId);
   })
 }
+
+
+
+
+// function addToQueue(videoId) {
+// console.log(videoId);
+//   $.ajax( {
+//     url: '/new_song',
+//     type: 'post',
+//     data: {video_id: videoId}
+//   }).done(function(){
+//   })
+// }
+
+
+var nextSong;
+
+function playNextSong(song) {
+  if(window.player == null) {
+  console.log('inside if statement');
+      onYouTubeIframeAPIReady();
+    }
+  function onYouTubeIframeAPIReady() {
+    window.player = new YT.Player('player', {
+      height: '100%',
+      width: '100%',
+       videoId: song,
+      playerVars:
+        {
+          controls: 1,
+          showinfo:0
+        },
+      events: {
+        'onReady': onReady,
+        'onStateChange': onStateChange
+      }
+    });    
+  }
+}
+
+
 
 
 

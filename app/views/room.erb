@@ -18,28 +18,7 @@
 
 
 
-<!--    <div id = "toggle_button">
-      X
-    </div> -->
-    <div id = "hide_sidbar">
-      <div id = "sidebar">
-        
-        <% @playlist_videos.each do |video| %>
-        <div class = "queue_container">
-          <div class = "sidebar_thumbnail">
-            <img src = "<%= video.thumbnails.first.url %>" class = "youtube_thumbnail">
-          </div>
 
-          <div class = "queue_right">
-            <div class = "queue_title"> <%= video.title %></div> 
-            <br>
-          </div>
-        </div>
-        <% end %>
-        <div class="add_queue">
-        </div>
-      </div>
-    </div>
 
   </div>
 
@@ -65,16 +44,15 @@
   var firstScriptTag = document.getElementsByTagName('script')[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   var done = false;
-  var player;
+  window.player;
 
   function onYouTubeIframeAPIReady() {
-    player = new YT.Player('player', {
+    window.player = new YT.Player('player', {
       height: '100%',
       width: '100%',
+       videoId: "<%= @video_id %>",
       playerVars:
         {
-          listType:'playlist',
-          list: "<%= @playlist_id %>",
           controls: 1,
           showinfo:0
         },
@@ -86,10 +64,20 @@
   }
 
   function onReady() {
-    player.addEventListener('onStateChange', function(e) {
-      console.log('State is:', e.data);
+    window.player.addEventListener('onStateChange', function(e) {
+      // console.log('State is:', e.data);
       if ( e.data == 0) {
-        console.log("video has finished")
+        $.ajax({
+          url: '/playlist',
+          type: 'post'
+        }).done( function(song) {
+            window.player.destroy();
+            window.player = null
+            if (song) {
+              playNextSong(song["queue"]);
+            }
+
+        })
       }
     });
   }
@@ -106,9 +94,13 @@
 
   function onStateChange(newState) {
     if ( newState == 0 ) {
-      console.log("video has finished")
+      // console.log("onStateChange");
       /* load next video */
-      player.nextVideo();
+      // window.player.destroy();
+      // window.player = null
+      // console.log('after destroy');
+      // playNextSong();
+      // console.log('hey')
     }
   }
 

@@ -11,6 +11,8 @@ require 'rubygems'
 require 'uri'
 require 'pathname'
 
+require 'CSV'
+
 require 'pry'
 
 require 'pg'
