@@ -2,7 +2,7 @@
   <% reply1.videos.each do |video| %>
   <div class = "search_block">
   <div class = "thumbnail">
-    <a href= "/first_search/results/<%=video.unique_id%>"><img src = "<%= video.thumbnails.first.url %>" class = "result_thumbnail"></a>
+    <a href= "/first_search/results/<%=video.unique_id%>"><img src = "<%= video.thumbnails.first.url %>" class = "first_thumbnail"></a>
   </div>
   <div class = "queue_right">
     <a href = "<%= video.media_content.first.url %>">
@@ -18,7 +18,7 @@
   <% reply2.videos.each do |video| %>
   <div class = "search_block">
   <div class = "thumbnail">
-    <a href= "/first_search/results/<%=video.unique_id%>"><img src = "<%= video.thumbnails.first.url %>" class = "result_thumbnail"></a>
+    <a href= "/first_search/results/<%=video.unique_id%>"><img src = "<%= video.thumbnails.first.url %>" class = "first_thumbnail"></a>
   </div>
 
     <a href = "<%= video.media_content.first.url %>">

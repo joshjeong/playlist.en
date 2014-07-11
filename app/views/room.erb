@@ -43,6 +43,8 @@
   </div>
 
   <div class = "bottom_half gradient">
+    <h3>Room Name: <%= @room_name %></h3>
+    <br>
 
     <div id = "search_container">
       <form action= "/search" method = "post" id = "search">
@@ -74,7 +76,8 @@
       playerVars:
       {
         controls: 1,
-        showinfo:0
+        showinfo: 0,
+        autoplay: 1
       },
       events: {
         'onReady': onReady,
@@ -85,13 +88,15 @@
 
   function onReady() {
     window.player.addEventListener('onStateChange', function(e) {
+      var firstVideo = true;
       // console.log('State is:', e.data);
       if ( e.data == 0) {
+          window.player.destroy();
         $.ajax({
           url: '/playlist',
-          type: 'post'
+          type: 'post',
+          data: {firstVideo: true}
         }).done( function(song) {
-          window.player.destroy();
           window.player = null
           if (song) {
             playNextSong(song["queue"]);

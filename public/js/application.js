@@ -128,7 +128,6 @@ var nextSong;
 
 function playNextSong(song) {
   if(window.player == null) {
-  console.log('inside if statement');
       onYouTubeIframeAPIReady();
     }
   function onYouTubeIframeAPIReady() {
@@ -139,7 +138,8 @@ function playNextSong(song) {
       playerVars:
         {
           controls: 1,
-          showinfo:0
+          showinfo:0,
+          autoplay: 1
         },
       events: {
         'onReady': onReady,

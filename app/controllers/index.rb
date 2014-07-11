@@ -35,13 +35,16 @@ get '/room/:video_id/:host' do
 		@host = true
 		# @playlist_id = params[:playlist_id]
 		@video_id = params[:video_id]
+		@room_name = session[:name]
 		erb :room
 	elsif params[:host] == 'guest'
 		current_room
 		get_client
-		@playlist_videos = @current_room.songs.first
+		p @current_room
+		@playlist_videos = @current_room.first.songs
 		# @playlist_videos = @client.playlist(params[:playlist_id]).videos
 		@host = false
+		@room_name = session[:name]
 		erb :room
 	end
 end
@@ -66,8 +69,10 @@ get '/first_search/results/:video_id' do
 	current_room
 	# @playlist_id = session[:playlist_id]
 	# @client.add_video_to_playlist(@playlist_id, params[:video_id])	
+	p '----------------'
 	p 'before first number of songs'
 	@current_room.first.songs.create(video_id: params[:video_id])
+	p '----------------'
 	p 'after add number of songs'
 	session[:video_id] = params[:video_id]
 	@video_id = params[:video_id]
@@ -99,6 +104,8 @@ post '/add' do
 	erb :new_song, locals: {title: title, thumbnail_url: thumbnail_url}, layout: false
 end
 
+
+
 post '/signout' do
 	session.clear
 	redirect '/'
@@ -107,6 +114,12 @@ end
 post '/playlist' do
 	get_client
 	current_room
+	if params[:firstVideo] == "true"
+		@current_room.first.songs.first.destroy
+		next_song = @current_room.first.songs.first
+		content_type 'json'
+		return {queue: next_song.video_id}.to_json
+	end
 	if @current_room.first.songs.count > 0
 		next_song = @current_room.first.songs.first.destroy
 		content_type 'json'
