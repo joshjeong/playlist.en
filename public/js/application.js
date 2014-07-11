@@ -1,21 +1,22 @@
 $(document).ready(function() {
 
-  sidebarStatus = false;
-  $('#toggle_button').click(function() {
-    if (sidebarStatus == false) {
-      $('#sidebar').animate({
-        right: "0",
-      }, 2000);
-      sidebarStatus = true;
-  }
-    else {
-      $('#sidebar').animate({
-        right: "-21rem"
-      }, 2500);
-      sidebarStatus = false;
-    }
-  });
+  // sidebarStatus = false;
+  // $('#toggle_button').click(function() {
+  //   if (sidebarStatus == false) {
+  //     $('#sidebar').animate({
+  //       right: "0",
+  //     }, 2000);
+  //     sidebarStatus = true;
+  // }
+  //   else {
+  //     $('#sidebar').animate({
+  //       right: "-21rem"
+  //     }, 2500);
+  //     sidebarStatus = false;
+  //   }
+  // });
   bindEvents();
+  addEventListener("onStateChange", "onplayerStateChange");
 
 });
 
@@ -25,9 +26,17 @@ function bindEvents() {
   searchListener();
   searchFirstSong();
   addListener();
+  // addVideoToPlaylist();
 }
 
 //-----------------------------------------------
+
+// function addVideoToPlaylist() {
+//   $('#first_search').on('submit', function(e){
+//     e.preventDefault();
+//     console.log($(this).parents('a').attr('href'));
+//     addToPlaylist($(this).parents('a').attr('href'));
+//   }
 
 function searchListener() {
   $('#search').on('submit', function(e){
@@ -37,22 +46,26 @@ function searchListener() {
 }
 
 
+
 function searchFirstSong() {
-  console.log('searchfirstsong')
   $('#first_search').on('submit', function(e){
     e.preventDefault();
     createFirstSearch( $(this) );
+    $('.first_search_area').slideDown("slow");
   })
 }
+
 
 function addListener() {
   $('.search_area').on('click', '.result_thumbnail', function(e) {
     e.preventDefault();
-    console.log($(this));
+    console.log($(this).parents('a').attr('href'));
     addQueue($(this));
-    console.log('here');
   })
 }
+
+
+
 
 
 
@@ -84,16 +97,15 @@ function createFirstSearch(button) {
 }
 
 
+
 function addQueue(button) {
-  console.log('add ho');
   $.ajax({
     type: "post",
     url: '/add',
     data: {addVideo: button.parents('a').attr('href')}
   }).done(function(response) {
-    console.log('response');
     $('.add_queue').append(response);
-
+    $("html, body").animate({ scrollTop: 0 }, "slow");
   })
 }
 
@@ -101,37 +113,27 @@ function addQueue(button) {
 
 //----------------------------------------------- 
 
-  // Load the IFrame Player API code asynchronously.
-  var tag = document.createElement('script');
-  tag.src = "https://www.youtube.com/player_api";
-  var firstScriptTag = document.getElementsByTagName('script')[0];
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-  // Replace the 'ytplayer' element with an <iframe> and
-  // YouTube player after the API code downloads.
-  var player;
+  
 
+  // function addToPlaylist(id, startPos, endPos) {
+  //   var details = {
+  //     videoId: id,
+  //     kind: 'youtube#video'
+  //   }
 
-  function onYouTubePlayerAPIReady() {
-    $.ajax({
-      type: "get",
-      url: '/test/playlist'
-    }).done(function(response){
-      player = new YT.Player('ytplayer', {
-      height: '600',
-      width: '640',
-      videoId: '32FbVRrVVNE',
-      playerVars: {
-        listType:'playlist',
-        list: 'UUPW9TMt0le6orPKdDwLR93w'
-      }
-    });
-    })
-  }
-
-
-
-
-
-
+  //   var request = gapi.client.youtube.playlistItems.insert({
+  //     part: 'snippet',
+  //     resource: {
+  //       snippet: {
+  //         playlistId: playlistId,
+  //         resourceId: details
+  //       }
+  //     }
+  //   });
+  
+  //    request.execute(function(response) {
+  //     $('#status').html('<pre>' + JSON.stringify(response.result) + '</pre>');
+  //    });
+  //   }
 

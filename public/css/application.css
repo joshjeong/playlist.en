@@ -1,16 +1,10 @@
 /*HOMEPAGE*/
 
 
-body {
-	background: url('http://wallpapers.ghlk.net/2t2bW.jpg') no-repeat center center fixed;
-	background-size: cover;
-}
-
 h1 {
 	color: white;
 	margin: auto;
 	text-align: center;
-	/*margin-top: 10%;*/
 	font-size: 4em;
 	font-family: 'Ubuntu', sans-serif;
 	font-weight: bolder;
@@ -18,13 +12,13 @@ h1 {
 
 .text_container {
 	position: absolute;
-	margin-top: 5rem;
+	margin-top: 7%;
 	width: 100%;
 }
 
 #blurb {
 	position: relative;
-	top: 4rem;
+	top: 3%;
 	color: white;
 	margin: auto;
 	text-align: center;
@@ -33,7 +27,7 @@ h1 {
 	font-weight: 500;
 }
 
-#join_button {
+.button_placement {
 	margin: 5px auto 0px auto;
 	height: 35px;
 	text-align: center;
@@ -44,7 +38,7 @@ h1 {
 	padding-right: 2px;
 }
 
-#join_button input {
+.button_placement input {
 	border: 0;
 	background: none;
 	color: white;
@@ -53,7 +47,7 @@ h1 {
 	font-family: 'Ubuntu', sans-serif;
 }
 
-#join_button:active  {
+.button_placement:active  {
 	background-color: #3e98bc;
 }
 
@@ -61,7 +55,7 @@ h1 {
 	position: absolute;
 	width: 100%;
 	height: 10rem;
-	margin-top: 15rem;
+	margin-top: 28%;
 }
 
 .container {
@@ -69,8 +63,7 @@ h1 {
 	margin: auto;
 }
 
-.fields {
-	margin-top: 15rem;
+.field_width {
 	width: 16rem;
 	margin: auto;
 
@@ -81,6 +74,7 @@ h1 {
 	height: 50px;
   width: 100%;
 	border: none;
+
 	font-size: 18px;
 	font-weight: lighter;
 	/*padding-left: 8px;*/
@@ -91,6 +85,13 @@ h1 {
 
 
 /*YOUTUBE*/
+
+/*.html5-title */
+/*html5-player-chrome html5-stop-propagation*/
+#player {
+	position: fixed;
+}
+
 
 #youtube_background {
 	z-index: -99;
@@ -194,10 +195,10 @@ iframe[seamless]{
 .bottom_half {
 	width: 50rem;
 	background-color: rgba(0,0,0,0.85);
-	margin: auto;
-	padding: 1rem;
+	margin: 0 auto;
+	padding: 1rem 1rem 7% 1rem;
 	position: relative;
-	margin-top: 7rem;
+	margin-top: 50%;
 	border-radius: 0.5rem;
 }
 
@@ -260,7 +261,7 @@ iframe[seamless]{
 
 .search_area {
 	margin-top: 1rem;
-	height: 43rem;
+	height: 15rem;
 	padding: 2rem;
 	overflow: scroll;
 }
@@ -268,6 +269,11 @@ iframe[seamless]{
 .search_title {
 	display: inline;
 }
+
+.top_half {
+	height: 100%;
+}
+
 
 .div_thumbnail {
 	display: inline;
@@ -303,15 +309,79 @@ iframe[seamless]{
 	width: 100%;
 }
 
-.first_song_container {
+.first_container {
 	position: relative;
-	background-color: pink;
 	width: 40rem;
+	height: 25rem;
 	margin: auto;
+	overflow: scroll;
 }
 
 .first_search_area {
+	display: none;
 	position: absolute;	
 	width: 100%;
-	margin-top: 23rem;
+	height: 100%;
+	margin-top: 6%;
 }
+
+
+.first_left_color, .right_left_color {
+	background: rgb(238,238,238); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(238,238,238,1) 0%, rgba(204,204,204,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(238,238,238,1)), color-stop(100%,rgba(204,204,204,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* IE10+ */
+	background: linear-gradient(to bottom, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+}
+
+
+button, .button {
+  border-style: solid;
+  border-width: 0px;
+  cursor: pointer;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: normal;
+  line-height: normal;
+  margin: 0 0 1.25rem;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  display: inline-block;
+  padding-top: 1rem;
+  padding-right: 2rem;
+  padding-bottom: 1.0625rem;
+  padding-left: 2rem;
+  font-size: 1rem;
+  background-color: #008cba;
+  border-color: #007095;
+  color: white;
+  transition: background-color 300ms ease-out; }
+button:hover, button:focus, .button:hover, .button:focus {
+    background-color: #007095; }
+button:hover, button:focus, .button:hover, .button:focus {
+    color: white; }
+.button:focus, .button:active {
+    outline: none;
+		border: none;
+    }
+button.expand, .button.expand {
+    padding-right: 0;
+    padding-left: 0;
+    width: 100%; }
+button.left-align, .button.left-align {
+    text-align: left;
+    text-indent: 0.75rem; }
+button.right-align, .button.right-align {
+    text-align: right;
+    padding-right: 0.75rem; }
+@media only screen and (min-width: 40.063em) {
+button, .button {
+    display: inline-block; } }
+meta.foundation-mq-topbar {
+  font-family: "/only screen and (min-width:40.063em)/";
+  width: 40.063em; }

@@ -7,13 +7,17 @@
 
 
     <div class = "field_container">
-      <div class = "fields">
+      <div class = "field_width">
         <form action= "/room" method = "post">
-          <input class = "input_field" id = "room" name = "name" type="text" placeholder="Where you're friends at?">
-          <div id = "join_button">
-            <input type = "submit" id = "join" value = "Join">
-          </div>
+          <input class = "input_field" id = "room" name = "name" type="text" placeholder="Where you're friends at?" autocomplete="off" required>
+            <input type = "submit" class = "button expand" id = "join" value = "Join">
         </form>
       </div>
     </div>
 
+
+<script>
+  document.body.style.background="url('https://38.media.tumblr.com/a1400ccedb495be3099505e32f15d43b/tumblr_n8hftlTDqs1qbqjq1o1_1280.jpg') no-repeat center center fixed"
+  document.body.style.backgroundSize = "100% 80%"
+
+</script>
