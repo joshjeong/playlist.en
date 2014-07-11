@@ -1,21 +1,22 @@
 $(document).ready(function() {
 
-  sidebarStatus = false;
-  $('#toggle_button').click(function() {
-    if (sidebarStatus == false) {
-      $('#sidebar').animate({
-        right: "0",
-      }, 2000);
-      sidebarStatus = true;
-  }
-    else {
-      $('#sidebar').animate({
-        right: "-21rem"
-      }, 2500);
-      sidebarStatus = false;
-    }
-  });
+  // sidebarStatus = false;
+  // $('#toggle_button').click(function() {
+  //   if (sidebarStatus == false) {
+  //     $('#sidebar').animate({
+  //       right: "0",
+  //     }, 2000);
+  //     sidebarStatus = true;
+  // }
+  //   else {
+  //     $('#sidebar').animate({
+  //       right: "-21rem"
+  //     }, 2500);
+  //     sidebarStatus = false;
+  //   }
+  // });
   bindEvents();
+  addEventListener("onStateChange", "onplayerStateChange");
 
 });
 
@@ -37,22 +38,26 @@ function searchListener() {
 }
 
 
+
 function searchFirstSong() {
   console.log('searchfirstsong')
   $('#first_search').on('submit', function(e){
     e.preventDefault();
     createFirstSearch( $(this) );
+    $('.first_search_area').slideDown("slow");
   })
 }
+
 
 function addListener() {
   $('.search_area').on('click', '.result_thumbnail', function(e) {
     e.preventDefault();
-    console.log($(this));
     addQueue($(this));
-    console.log('here');
   })
 }
+
+
+
 
 
 
@@ -84,27 +89,18 @@ function createFirstSearch(button) {
 }
 
 
+
 function addQueue(button) {
-  console.log('add ho');
   $.ajax({
     type: "post",
     url: '/add',
     data: {addVideo: button.parents('a').attr('href')}
   }).done(function(response) {
-    console.log('response');
     $('.add_queue').append(response);
-
+    $("html, body").animate({ scrollTop: 0 }, "slow");
   })
 }
 
 
 
 //----------------------------------------------- 
-
-
-
-
-
-
-
-

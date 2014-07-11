@@ -12,7 +12,10 @@ Personal playlist
 YouTube login
 
 
-play first video
-increment counter
-select next song on callback
-(playlist_id, position_counter)
+
+
+problems
+playlist doesnt update songs
+when reload page, it adds song again
+(select next song on callback)
+if guest. scroll to top

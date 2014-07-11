@@ -1,99 +1,124 @@
 <div id = "room_page">
 
-	<div class = "top_half">
+  <div class = "top_half">
 
-		<div class = "signout">
-			<a href = "/signout"> Bounce </a>
-		</div>
+    <div class = "signout">
+      <a href = "/signout"> Bounce </a>
+    </div>
 
 <!-- "https://www.youtube.com/v/M7lc1UVf-VE?controls=0&rel=0&showinfo=0&autohide=1&version=3" -->
 
-	<% if @host == true %>
-		<div class = "start_youtube">
-  	</div>
+  <% if @host == true %>
+    <div class = "start_youtube">
+    </div>
 
-			<div id="player"></div>
-		<% end %>
-
-
-		<div id = "toggle_button">
-			X
-		</div>
-		<div id = "hide_sidbar">
-			<div id = "sidebar">
-				
-				<% @playlist_videos.each do |video| %>
-				<div class = "queue_container">
-					<div class = "sidebar_thumbnail">
-						<img src = "<%= video.thumbnails.first.url %>" class = "youtube_thumbnail">
-					</div>
-
-					<div class = "queue_right">
-						<div class = "queue_title"> <%= video.title %></div> 
-						<br>
-					</div>
-				</div>
-				<% end %>
-				<div class="add_queue">
-				</div>
-			</div>
-		</div>
-
-	</div>
-
-	<div class = "bottom_half">
-
-			<div id = "search_container">
-				<form action= "/search" method = "post" id = "search">
-					<img id = "mag_glass" src = "http://www.9zap.com/wp-content/uploads/2010/08/329.jpg">
-					<input  type="text" id = "search_field"name = "search" placeholder="Search YouTube">
-				</form>
-			</div>
-		<div class ="search_area">
-			<div class = "result_container">
-			</div>
-		</div>
+      <div id="player"></div>
+    <% end %>
 
 
 
 
-	</div>
+<!--    <div id = "toggle_button">
+      X
+    </div> -->
+    <div id = "hide_sidbar">
+      <div id = "sidebar">
+        
+        <% @playlist_videos.each do |video| %>
+        <div class = "queue_container">
+          <div class = "sidebar_thumbnail">
+            <img src = "<%= video.thumbnails.first.url %>" class = "youtube_thumbnail">
+          </div>
 
+          <div class = "queue_right">
+            <div class = "queue_title"> <%= video.title %></div> 
+            <br>
+          </div>
+        </div>
+        <% end %>
+        <div class="add_queue">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class = "bottom_half">
+
+      <div id = "search_container">
+        <form action= "/search" method = "post" id = "search">
+          <img id = "mag_glass" src = "http://www.9zap.com/wp-content/uploads/2010/08/329.jpg">
+          <input  type="text" id = "search_field"name = "search" placeholder="Search YouTube" autocomplete="off" required>
+        </form>
+      </div>
+    <div class ="search_area">
+      <div class = "result_container">
+      </div>
+    </div>
+  </div>
 </div>
 
-		<script>
-	     //Load player api asynchronously.
-    var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    var done = false;
-    var player;
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-          height: '390',
-          width: '640',
-					playerVars:
-						{
-	  					listType:'playlist',
-	  					list: "<%= @playlist_id %>"
-	  				},
-          events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-          }
-        });
+<script>
+  //Load player api asynchronously.
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  var done = false;
+  var player;
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      height: '100%',
+      width: '100%',
+      playerVars:
+        {
+          listType:'playlist',
+          list: "<%= @playlist_id %>",
+          controls: 1,
+          showinfo:0
+        },
+      events: {
+        'onReady': onReady,
+        'onStateChange': onStateChange
+      }
+    });    
+  }
+
+  function onReady() {
+    player.addEventListener('onStateChange', function(e) {
+      console.log('State is:', e.data);
+      if ( e.data == 0) {
+        console.log("video has finished")
+      }
+    });
+  }
+    // function onPlayerReady(evt) {
+    //     evt.target.playVideo();
+    // }
+    // function onPlayerStateChange(evt) {
+        // if (evt.data == YT.PlayerState.PLAYING && !done) {
+        //     setTimeout(stopVideo, 6000);
+        //     done = true;
+        // }
+    // }
+    // }
+
+  function onStateChange(newState) {
+    if ( newState == 0 ) {
+      console.log("video has finished")
+      /* load next video */
+      player.nextVideo();
     }
-    function onPlayerReady(evt) {
-        evt.target.playVideo();
-    }
-    function onPlayerStateChange(evt) {
-        if (evt.data == YT.PlayerState.PLAYING && !done) {
-            setTimeout(stopVideo, 6000);
-            done = true;
-        }
-    }
-    function stopVideo() {
-        player.stopVideo();
-    }
-  </script>
+  }
+
+
+  //  if (evt.data == YT.PlayerState.ENDED) {
+  //    function nextVideo({
+  //      player.nextVideo()
+  //    })
+  // }
+  // function stopVideo() {
+  //     player.stopVideo();
+  // }
+</script>
