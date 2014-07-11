@@ -11,7 +11,7 @@ post '/room' do
 		@playlist_id = @playlist.playlist_id
 		@new_room = Room.create(name: params[:name])
 		session[:name] = params[:name]
-		p 'in /room'
+		p 'Room Name:'
 		p session[:name]
 		current_room
 		redirect '/first_search'
@@ -31,6 +31,7 @@ get '/room/:video_id/:host' do
 		get_client
 		# @client.add_video_to_playlist(session[:playlist_id], session[:video_id] )
 		# @playlist_videos = @client.playlist(session[:playlist_id]).videos
+		@playlist_videos = @current_room.first.songs
 		@host = true
 		# @playlist_id = params[:playlist_id]
 		@video_id = params[:video_id]
@@ -38,6 +39,7 @@ get '/room/:video_id/:host' do
 	elsif params[:host] == 'guest'
 		current_room
 		get_client
+		@playlist_videos = @current_room.songs.first
 		# @playlist_videos = @client.playlist(params[:playlist_id]).videos
 		@host = false
 		erb :room
@@ -89,9 +91,12 @@ post '/add' do
 	# @client.add_video_to_playlist(session[:playlist_id], params[:addVideo])
 	@current_room.first.songs.create(video_id: params[:addVideo])
 	# @allVideos = @client.playlist(session[:playlist_id])
+	video_info = @client.video_by(params[:addVideo])
 	video = @client.video_by(params[:addVideo])
 	video_id = params[:addVideo]
-	erb :new_song, locals: {video: video, video_id: video_id}, layout: false
+	thumbnail_url = video_info.thumbnails.first.url
+	title = video_info.title
+	erb :new_song, locals: {title: title, thumbnail_url: thumbnail_url}, layout: false
 end
 
 post '/signout' do

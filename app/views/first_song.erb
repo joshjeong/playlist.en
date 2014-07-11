@@ -4,10 +4,11 @@
   <div class = "thumbnail">
     <a href= "/first_search/results/<%=video.unique_id%>"><img src = "<%= video.thumbnails.first.url %>" class = "result_thumbnail"></a>
   </div>
-
+  <div class = "queue_right">
     <a href = "<%= video.media_content.first.url %>">
       <div class = "search_title"> <%= video.title %></div> 
     </a>
+  </div>
     <br>
 </div>
   <% end %>
