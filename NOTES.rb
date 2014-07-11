@@ -19,3 +19,4 @@ playlist doesnt update songs
 when reload page, it adds song again
 (select next song on callback)
 if guest. scroll to top
+custom error message

@@ -26,12 +26,10 @@ get '/room/:playlist_id/:host' do
 	if params[:host] == 'host'
 		current_room
 		get_client
-		# @playlist_id = @current_room.first.playlist_id
-		@client.add_video_to_playlist(session[:playlist_id], session[:video_id] )
+		# @client.add_video_to_playlist(session[:playlist_id], session[:video_id] )
 		@playlist_videos = @client.playlist(session[:playlist_id]).videos
 		@host = true
 		@playlist_id = params[:playlist_id]
-		# session.clear
 		erb :room
 	elsif params[:host] == 'guest'
 		current_room
@@ -58,7 +56,9 @@ post '/first_search/results' do
 end
 
 get '/first_search/results/:video_id' do
+	get_client
 	@playlist_id = session[:playlist_id]
+	@client.add_video_to_playlist(@playlist_id, params[:video_id])
 	session[:video_id] = params[:video_id]
 	redirect "/room/#{@playlist_id}/host"
 end

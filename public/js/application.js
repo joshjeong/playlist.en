@@ -26,9 +26,17 @@ function bindEvents() {
   searchListener();
   searchFirstSong();
   addListener();
+  // addVideoToPlaylist();
 }
 
 //-----------------------------------------------
+
+// function addVideoToPlaylist() {
+//   $('#first_search').on('submit', function(e){
+//     e.preventDefault();
+//     console.log($(this).parents('a').attr('href'));
+//     addToPlaylist($(this).parents('a').attr('href'));
+//   }
 
 function searchListener() {
   $('#search').on('submit', function(e){
@@ -40,7 +48,6 @@ function searchListener() {
 
 
 function searchFirstSong() {
-  console.log('searchfirstsong')
   $('#first_search').on('submit', function(e){
     e.preventDefault();
     createFirstSearch( $(this) );
@@ -52,6 +59,7 @@ function searchFirstSong() {
 function addListener() {
   $('.search_area').on('click', '.result_thumbnail', function(e) {
     e.preventDefault();
+    console.log($(this).parents('a').attr('href'));
     addQueue($(this));
   })
 }
@@ -104,3 +112,28 @@ function addQueue(button) {
 
 
 //----------------------------------------------- 
+
+
+  
+
+  // function addToPlaylist(id, startPos, endPos) {
+  //   var details = {
+  //     videoId: id,
+  //     kind: 'youtube#video'
+  //   }
+
+  //   var request = gapi.client.youtube.playlistItems.insert({
+  //     part: 'snippet',
+  //     resource: {
+  //       snippet: {
+  //         playlistId: playlistId,
+  //         resourceId: details
+  //       }
+  //     }
+  //   });
+  
+  //    request.execute(function(response) {
+  //     $('#status').html('<pre>' + JSON.stringify(response.result) + '</pre>');
+  //    });
+  //   }
+
