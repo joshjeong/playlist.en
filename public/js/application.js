@@ -51,7 +51,7 @@ function searchFirstSong() {
   $('#first_search').on('submit', function(e){
     e.preventDefault();
     createFirstSearch( $(this) );
-    $('.first_search_area').slideDown("slow");
+    $('.first_search_area').show();
   })
 }
 
@@ -134,7 +134,7 @@ function playNextSong(song) {
     window.player = new YT.Player('player', {
       height: '100%',
       width: '100%',
-       videoId: song,
+      videoId: song,
       playerVars:
         {
           controls: 1,

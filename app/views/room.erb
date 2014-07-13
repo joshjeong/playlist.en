@@ -1,5 +1,5 @@
 <div id = "room_page">
-
+<% if @host == true %>
   <div class = "top_half">
 
     <div class = "signout">
@@ -8,12 +8,11 @@
 
     <!-- "https://www.youtube.com/v/M7lc1UVf-VE?controls=0&rel=0&showinfo=0&autohide=1&version=3" -->
 
-    <% if @host == true %>
+    
     <div class = "start_youtube">
     </div>
 
     <div id="player"></div>
-    <% end %>
 
     <div id = "hide_sidbar">
       <div id = "sidebar">
@@ -41,6 +40,7 @@
 
 
   </div>
+    <% end %>
 
   <div class = "bottom_half gradient">
     <h3>Room Name: <%= @room_name %></h3>
@@ -60,6 +60,7 @@
 </div>
 
 <script>
+
   //Load player api asynchronously.
   var tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
@@ -138,4 +139,7 @@
   // function stopVideo() {
   //     player.stopVideo();
   // }
+
+  document.body.style.background="url('http://images.alphacoders.com/174/174991.jpg') no-repeat center center fixed";
+  document.body.style.backgroundSize = "cover";
   </script>

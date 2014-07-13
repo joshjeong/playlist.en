@@ -18,8 +18,11 @@
 
 
 <script>
-  document.body.style.background="url('https://38.media.tumblr.com/a1400ccedb495be3099505e32f15d43b/tumblr_n8hftlTDqs1qbqjq1o1_1280.jpg') no-repeat center center fixed"
-  document.body.style.backgroundSize = "100% 80%"
-window.onload = $('body').fadeIn("slow");
+  document.body.style.background="url('http://images.alphacoders.com/174/174991.jpg') no-repeat center center fixed";
+  document.body.style.backgroundSize = "cover";
+  $(document).ready(function(){
+    $("h1, #blurb, .field_container").hide(0).delay(300).fadeIn(1000)
+  });
+  // document.body.style.overflow = "hidden;
 
 </script>
