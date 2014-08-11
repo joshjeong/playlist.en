@@ -8,14 +8,14 @@ class RoomsController < ActionController::Base
     if Room.find_by(name: room_name)
       #send to host's room
     else
-      Room.create(name: room_name)
-      #send to 
+      @room = Room.create(name: room_name)
+      #send to select song page
+      redirect_to room_path(id: @room.name)
     end
-    redirect_to :rooms
   end
 
   def show
-    p '-----here in show------'
+    p 'in the show route-----------------'
     p params
   end
 
