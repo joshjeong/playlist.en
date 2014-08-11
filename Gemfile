@@ -19,7 +19,7 @@ gem 'haml'
 group :development, :test do
   gem 'binding_of_caller'
   gem 'better_errors'
-
+  gem 'dotenv-rails'
 end
 
 # Use jquery as the JavaScript library
