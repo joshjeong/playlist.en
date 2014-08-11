@@ -16,7 +16,11 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'haml'
 
-gem 'sass-rails'
+group :development, :test do
+  gem 'binding_of_caller'
+  gem 'better_errors'
+
+end
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
