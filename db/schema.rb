@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20140811005835) do
   create_table "rooms", force: true do |t|
     t.string   "name"
     t.string   "playlist"
+    t.boolean  "host"
+    t.integer  "track_num"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
