@@ -1,2 +1,9 @@
 %h1
   #{@room_name}
+
+
+:javascript
+  $(document).ready(function(){
+    ytplayer = new Youtube.Controller;
+    ytplayer.createPlayer();
+  })
