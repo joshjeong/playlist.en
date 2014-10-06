@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :rooms
-  root 'rooms#index'
-  
+  resources :rooms do
+    get 'pick', on: :collection
   end
+  root 'rooms#index'
+
+    
+end
