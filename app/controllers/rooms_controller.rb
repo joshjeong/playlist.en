@@ -5,18 +5,16 @@ class RoomsController < ActionController::Base
 
   def create
     room_name = params[:room][:name]
-    if Room.find_by(name: room_name)
-      #send to host's room
-    else
-      @room = Room.create(name: room_name)
-      #send to select song page
-      redirect_to room_path(id: @room.name)
-    end
+    Room.create(name: room_name) if Room.find_by(name: room_name)==nil
+    redirect_to pick_rooms_path(id: room_name)
   end
 
   def show
-    p 'in the show route-----------------'
-    p params
+    @room_name = params[:id]
+  end
+
+  def pick
+
   end
 
 end
