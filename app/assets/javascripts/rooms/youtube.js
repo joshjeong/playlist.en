@@ -1,12 +1,18 @@
+Youtube.Controller = function(){
 
-var Youtube_player = {}
+  var params = { allowScriptAccess: "always" };
+      atts = { id: "myytplayer" };
+      settings = "?enablejsapi=1&playerapiid=ytplayer&version=3"
+      video_id = "0s0Iyd1xqoI"
+      and = "&"
+      autoplay = "autoplay=1"
+      controls = "controls=0"
+      info = "showinfo=0"
 
-Youtube_player = function(){
+  this.createPlayer = function(){
 
- var params = { allowScriptAccess: "always" };
-    var atts = { id: "myytplayer" };
-    swfobject.embedSWF("http://www.youtube.com/v/VIDEO_ID?enablejsapi=1&playerapiid=ytplayer&version=3",
-                       "ytapiplayer", "425", "356", "8", null, null, params, atts);
-  
+  swfobject.embedSWF("http://www.youtube.com/v/"+video_id+settings+and+autoplay+and+controls+and+info,
+                    "ytapiplayer", "425", "356", "8", null, null, params, atts);
+  }
 }
 
