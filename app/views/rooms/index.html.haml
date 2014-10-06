@@ -11,5 +11,8 @@
 
 
 :javascript
-  ytplayer.createPlayer()
+  $(document).ready(function(){
+    ytplayer = new Youtube.Controller;
+    ytplayer.createPlayer();
+  })
   

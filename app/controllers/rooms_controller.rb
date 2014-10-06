@@ -1,4 +1,4 @@
-class RoomsController < ActionController::Base
+class RoomsController < ApplicationController
   def index
     @room = Room.new
   end
