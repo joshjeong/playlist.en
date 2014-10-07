@@ -12,6 +12,9 @@ class RoomsController < ApplicationController
 
   def show
     @room_name = params[:id]
+    @video_id = params[:first]
   end
+
+  
 
 end
