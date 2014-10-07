@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
   def index
     @room = Room.new
+    @client ||= YouTubeIt::Client.new(:dev_key => ENV["API_KEY"])
   end
 
   def create
@@ -11,10 +12,6 @@ class RoomsController < ApplicationController
 
   def show
     @room_name = params[:id]
-  end
-
-  def pick
-
   end
 
 end
