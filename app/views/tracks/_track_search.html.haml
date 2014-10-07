@@ -1,0 +1,3 @@
+=form_for @track, url: room_tracks_path(@room)  do |f|
+  = f.text_field :video_id, placeholder: "Pick first song"
+  = f.submit "Search"
