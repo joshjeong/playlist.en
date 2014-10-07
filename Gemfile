@@ -36,6 +36,8 @@ gem 'spring',        group: :development
 
 gem 'pry'
 
+gem 'youtube_it', '~> 2.4.0'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
