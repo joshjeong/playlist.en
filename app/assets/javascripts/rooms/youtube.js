@@ -1,7 +1,13 @@
+$(document).ready(function(){
+  ytplayer = new Youtube.Controller;
+  ytplayer.bindListeners();
+})
+
 Youtube.Controller = function(){
+  var self = this
 
   this.bindListeners = function(){
-    this.firstSearchListener();
+    this.selectSongListener();
   }
 
   this.createPlayer = function(){
@@ -16,6 +22,16 @@ Youtube.Controller = function(){
     
     swfobject.embedSWF("http://www.youtube.com/v/"+video_id+settings+and+autoplay+and+controls+and+info,
                     "ytapiplayer", "425", "356", "8", null, null, params, atts);
+  }
+
+  this.selectSongListener = function(){
+    $('.video-container').on('click',function(e){
+      // e.preventDefault();
+      self.selectSong($(this));
+    })
+  }
+
+  this.selectSong = function(button){
   }
 
 

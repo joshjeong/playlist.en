@@ -9,6 +9,7 @@ class TracksController < ApplicationController
 
   def create
     search_query = params[:track][:video_id]
+    @room = Room.find(params[:room_id])
     client ||= YouTubeIt::Client.new(:dev_key => ENV["API_KEY"])
     @results = client.videos_by(:query => search_query, :page => 1, :per_page => 10)
     render :show
