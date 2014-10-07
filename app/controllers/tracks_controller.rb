@@ -10,9 +10,7 @@ class TracksController < ApplicationController
   def create
     search_query = params[:track][:video_id]
     client ||= YouTubeIt::Client.new(:dev_key => ENV["API_KEY"])
-    @results1 = client.videos_by(:query => search_query, :page => 1, :per_page => 5)
-    @results2 = client.videos_by(:query => search_query, :page => 2, :per_page => 5)
-    @test =YouTubeIt::Parser::VideoFeedParser.new(@results1)
+    @results = client.videos_by(:query => search_query, :page => 1, :per_page => 10)
     render :show
   end
 
