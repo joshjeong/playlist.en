@@ -2,8 +2,11 @@
   #{@room_name}
 
 
+.div#ytapiplayer
+
+
 :javascript
   $(document).ready(function(){
     ytplayer = new Youtube.Controller;
-    ytplayer.createPlayer();
+    ytplayer.createPlayer("#{@video_id}");
   })
