@@ -1,3 +1,8 @@
-=form_for @track, url: room_tracks_path(@room)  do |f|
-  = f.text_field :video_id, placeholder: "Pick first song"
-  = f.submit "Search"
+/ =form_for @track, url: room_tracks_path(@room)  do |f|
+/   = f.text_field :video_id, placeholder: "Pick first song"
+/   = f.submit "Search"
+
+
+%form#search_first_song{action: '/rooms/'+ @room.id.to_s + '/tracks', method: "post"}
+  %input{placeholder: "Find search video"}
+  %input{type:"submit", value:"Search"} 
