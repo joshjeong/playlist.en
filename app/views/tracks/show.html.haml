@@ -1,5 +1,13 @@
-- @results1.videos.each do |video|
-  = video.title
-  = video.unique_id
-  =video.thumbnails.first.url
-  =video.media_content.first.url
+.row
+  - @results.videos.each do |video|
+    = link_to room_path(id: @room.name) do
+      .col-xs-10.col-md-7.video-container
+        .thumbnail
+          #video-title
+            = video.title
+          #video-image
+            = image_tag video.thumbnails.first.url
+          #video-id
+            = video.unique_id
+
+
