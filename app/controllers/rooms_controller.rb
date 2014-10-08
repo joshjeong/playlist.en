@@ -12,6 +12,7 @@ class RoomsController < ApplicationController
 
   def show
     @room_name = params[:id]
+    @room = Room.find_by('name=?', "#{@room_name}")
     @video_id = params[:first]
   end
 

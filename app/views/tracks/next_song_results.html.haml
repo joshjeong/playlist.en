@@ -1,6 +1,6 @@
 .row#search-results
   - @results.videos.each do |video|
-    = link_to room_path(id: @room.name, first: video.unique_id ) do
+    = link_to room_path(id: @room.id, first: video.unique_id ) do
       .col-xs-10.col-md-7.video-container
         .thumbnail
           #video-title

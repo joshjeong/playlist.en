@@ -4,9 +4,12 @@
 
 .div#ytapiplayer
 
+=render partial: "search"
+
 
 :javascript
   $(document).ready(function(){
     ytplayer = new Youtube.Controller;
+    ytplayer.bindListeners();
     ytplayer.createPlayer("#{@video_id}");
   })
