@@ -10,5 +10,6 @@
 :javascript
   $(document).ready(function(){
     ytplayer = new Youtube.Controller;
+    ytplayer.bindListeners();
     ytplayer.createPlayer("#{@video_id}");
   })

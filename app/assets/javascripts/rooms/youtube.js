@@ -88,6 +88,7 @@ Youtube.Controller = function(){
     }).done(function(response){
       $('#search-results').remove()
       $('#search-song').append(response)
+      $('#added_message').fadeOut(3000)
     })
 
   }
