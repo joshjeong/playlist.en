@@ -7,9 +7,7 @@ Youtube.Controller = function(){
   var self = this
 
   this.bindListeners = function(){
-    // this.selectSongListener();
     this.searchFirstSongListener();
-    this.searchNextSongListener();
   }
 
   this.createPlayer = function(videoId){
@@ -22,8 +20,10 @@ Youtube.Controller = function(){
       controls = "controls=0"
       info = "showinfo=0"
 
-    swfobject.embedSWF("http://www.youtube.com/v/"+video_id+settings+and+autoplay+and+controls+and+info,
-                    "ytapiplayer", "100%", "356", "8", null, null, params, atts);
+    swfobject.embedSWF("http://www.youtube.com/v/"+video_id+
+                      settings+and+autoplay+and+controls+and+info,
+                      "ytapiplayer", "100%", "356", "8", 
+                      null, null, params, atts);
   }
 
   this.searchFirstSongListener = function(){
@@ -33,13 +33,6 @@ Youtube.Controller = function(){
     })
   }
 
-  this.searchNextSongListener = function(){
-    $('#search-song').on('submit', function(e){
-      e.preventDefault();
-      console.log('should prevent default')
-      self.searchNextSong($(this));
-    })
-  }
 
   this.searchFirstSong = function(form){
     var url = form.attr("action")
@@ -52,21 +45,10 @@ Youtube.Controller = function(){
       $('#search-results').remove() 
       $('#search_first_song').append(response)
       $('#search_first_song').find('input').first().val("")
-    })
-  }
+      if($('#myytplayer').length==1){
+        self.clickSongListener();
+      }
 
-  this.searchNextSong = function(form){
-    var url = form.attr('action')
-        searchQuery = form.find('input').first().val()
-    $.ajax({
-      url: url,
-      type: "POST",
-      data: {nextSearch: searchQuery}
-    }).done(function(response){
-      $('#search-results').remove()
-      $('#search-song').append(response)
-      self.clickSongListener();
-      $('#search-song').find('input').first().val("")
     })
   }
 
@@ -79,38 +61,19 @@ Youtube.Controller = function(){
 
   this.clickSong = function(container){
     var parameters = container.parent().attr('href').split('?')
-        room = parameters[0]
+        url = $('#search_first_song').attr('action')
         videoId = parameters[1].split('=')[1]
     $.ajax({
-      url: room + "/tracks",
+      url: url,
       type: "POST",
       data: {addVideo: videoId}
     }).done(function(response){
       $('#search-results').remove()
-      $('#search-song').append(response)
+      $('#search_first_song').append(response)
       $('#added_message').fadeOut(3000)
     })
 
   }
-
-
-  // this.selectSongListener = function(){
-  //   $('.video-container').on('click',function(e){
-  //     e.preventDefault();
-  //     self.selectSong($(this));
-  //   })
-  // }
-
-  // this.selectSong = function(video){
-  //   videoId= $.trim(video.find('#video-id').html())
-  //   url = video.parent().attr('href')
-  //   $.ajax({
-  //     url: url,
-  //     type: "GET",
-  //     data: {video_id: videoId}
-  //   })
-  // }
-
 
 }
 
