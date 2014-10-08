@@ -7,7 +7,6 @@ class RoomsController < ApplicationController
     room_name = params[:room][:name]
     Room.create(name: room_name) if Room.find_by(name: room_name)==nil
     redirect_to room_tracks_path(room_id: room_name)
-    
   end
 
   def show
