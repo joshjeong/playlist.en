@@ -1,20 +1,52 @@
 class RoomsController < ApplicationController
+  include RoomHelper
   def index
     @room = Room.new
   end
 
   def create
     room_name = params[:room][:name]
-    Room.create(name: room_name) if Room.find_by(name: room_name)==nil
-    redirect_to room_tracks_path(room_id: room_name)
+    session[:queue] = []
+    # if Room.find_by(name: room_name)==nil
+      Room.create(name: room_name)
+      @room = Room.find_by(name: room_name)
+      redirect_to room_path(id: @room.id)
+    # else
+    #   redirect_to 
   end
 
   def show
-    @room_name = params[:id]
-    @room = Room.find_by('name=?', "#{@room_name}")
-    @video_id = params[:first]
+    @room = Room.find_by('name=?', "#{params[:id]}")
+    @video = params[:addVideo] 
+    render :show
   end
 
-  
+  def search
+    get_client
+    @room = Room.find(params[:id])
+    if params[:search]
+      search_query = params[:search]
+      @room.tracks.create(video_id: search_query)
+      @results = @client.videos_by(:query => search_query, :page => 1, :per_page => 10)
+      render :video_result
+    else
+      @room.tracks.create(video_id: params[:addVideo])
+    end
+  end
+
+  def theatre
+    @room = Room.find_by('name=?', params[:id])
+    @room.tracks.create(video_id: params[:video_id])
+    @new_video = @room.tracks.find_by('video_id=?', params[:video_id])
+    session[:queue] << @new_video
+    if params[:not_first_song]
+      binding.pry
+      render :song_added
+    else
+      @next_video = session[:queue].shift.video_id
+      render :theatre
+    end
+  end
+
 
 end

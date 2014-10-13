@@ -8,20 +8,7 @@ class TracksController < ApplicationController
   end
 
   def create
-    client ||= YouTubeIt::Client.new(:dev_key => ENV["API_KEY"])
-    @room = Room.find(params[:room_id])
-    if params[:search]
-      search_query = params[:search]
-      @room.tracks.create(video_id: search_query)
-      @results = client.videos_by(:query => search_query, :page => 1, :per_page => 10)
-      render :show
-    else
-      @room.tracks.create(video_id: params[:addVideo])
-      render :song_added
-    end
   end
 
-  def show
-  end
 
 end
