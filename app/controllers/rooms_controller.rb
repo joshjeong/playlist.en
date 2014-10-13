@@ -38,14 +38,21 @@ class RoomsController < ApplicationController
     @room = Room.find_by('name=?', params[:id])
     @room.tracks.create(video_id: params[:video_id])
     @new_video = @room.tracks.find_by('video_id=?', params[:video_id])
-    session[:queue] << @new_video
+    session[:queue] << @new_video.video_id
     if params[:not_first_song]
-      binding.pry
       render :song_added
     else
-      @next_video = session[:queue].shift.video_id
+      @next_video = session[:queue].shift
       render :theatre
     end
+  end
+
+  def nextvideo
+    p '-------------------------------'
+    p session[:queue]
+    p '-------------------------------'
+    @next_video = session[:queue].shift
+    render json: {video: @next_video}
   end
 
 

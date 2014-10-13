@@ -1,6 +1,6 @@
 $(document).ready(function(){
-  player = new Youtube.Controller;
-  player.bindListeners();
+  ytplayer = new Youtube.Controller;
+  ytplayer.bindListeners();
 })
 
 
@@ -17,29 +17,7 @@ Youtube.Controller = function(){
           if ( newState == 0 ) {
         }
       }
-      function playNextSong(song) {
-    if(window.player == null) {
-        onYouTubeIframeAPIReady();
-      }
-    function onYouTubeIframeAPIReady() {
-      window.player = new YT.Player('player', {
-        height: '100%',
-        width: '100%',
-        videoId: song,
-        playerVars:
-          {
-            controls: 1,
-            showinfo:0,
-            autoplay: 1
-          },
-        events: {
-          'onReady': onReady,
-          'onStateChange': onStateChange
-        }
-      });    
-    }
-  }
-
+  
 
 
 

@@ -30,17 +30,13 @@
       window.player.addEventListener('onStateChange', function(e) {
         var firstVideo = true;
         if ( e.data == 0) {
-            window.player.destroy();
+          console.log('song has ended')
+          window.player.destroy();
           $.ajax({
-            url: '/playlist',
-            type: 'post',
-            data: {firstVideo: true}
-          }).done( function(song) {
-            window.player = null
-            if (song) {
-              playNextSong(song["queue"]);
-            }
-
+            url: window.location.pathname+ '/nextvideo',
+            type: 'post'
+          }).done(function(response){
+            playNextVideo(response.video);
           })
         }
       });
@@ -50,3 +46,25 @@
         if ( newState == 0 ) {
       }
     }
+
+    function playNextVideo(video) {
+      console.log('play next video')
+      console.log(video)
+
+      window.player = new YT.Player('player', {
+        height: '100%',
+        width: '100%',
+        videoId: video,
+        playerVars:
+          {
+            controls: 1,
+            showinfo:0,
+            autoplay: 1
+          },
+        events: {
+          'onReady': onReady,
+          'onStateChange': onStateChange
+        }
+      });    
+    }
+
