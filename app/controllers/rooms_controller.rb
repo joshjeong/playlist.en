@@ -10,7 +10,7 @@ class RoomsController < ApplicationController
     # if Room.find_by(name: room_name)==nil
       Room.create(name: room_name)
       @room = Room.find_by(name: room_name)
-      redirect_to room_path(id: @room.id)
+      redirect_to room_path(id: @room.name)
     # else
     #   redirect_to 
   end
@@ -23,7 +23,7 @@ class RoomsController < ApplicationController
 
   def search
     get_client
-    @room = Room.find(params[:id])
+    @room = Room.find_by('name=?', params[:id])
     if params[:search]
       search_query = params[:search]
       @room.tracks.create(video_id: search_query)
@@ -48,9 +48,6 @@ class RoomsController < ApplicationController
   end
 
   def nextvideo
-    p '-------------------------------'
-    p session[:queue]
-    p '-------------------------------'
     @next_video = session[:queue].shift
     render json: {video: @next_video}
   end
