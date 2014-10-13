@@ -1,123 +1,70 @@
-$(document).ready(function(){
-  ytplayer = new Youtube.Controller;
-  ytplayer.bindListeners();
-})
-
-
 Youtube.Controller = function(){
-  var self = this
-      done = false;
-      
+    var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        done = false;
+        window.player;
 
-  this.bindListeners = function(){
-    this.searchFirstSongListener();
-  }
 
-  function onStateChange(newState) {
+    onYouTubeIframeAPIReady =function() {
+      window.player = new YT.Player('player', {
+        height: '100%',
+        width: '100%',
+        videoId: "#{@next_video}",
+        playerVars:
+        {
+          controls: 1,
+          showinfo: 0,
+          autoplay: 1
+        },
+        events: {
+          'onReady': onReady,
+          'onStateChange': onStateChange
+        }
+      });    
+    }
+
+    onReady =function() {
+        window.player.addEventListener('onStateChange', function(e) {
+          var firstVideo = true;
+          if ( e.data == 0) {
+            console.log('song has ended')
+            window.player.destroy();
+            $.ajax({
+              url: window.location.pathname+ '/nextvideo',
+              type: 'post'
+            }).done(function(response){
+              playNextVideo(response.video);
+            })
+          }
+        });
+      }
+
+        onStateChange =function(newState) {
           if ( newState == 0 ) {
         }
       }
-  
 
+      playNextVideo =function(video) {
+        console.log('play next video')
+        console.log(video)
 
-
-  // this.createPlayer = function(videoId){
-  //   var params = { allowScriptAccess: "always" };
-  //     atts = { id: "myytplayer" };
-  //     settings = "?enablejsapi=1&playerapiid=ytplayer&version=3"
-  //     video_id = videoId
-  //     and = "&"
-  //     autoplay = "autoplay=0"
-  //     controls = "controls=1"
-  //     info = "showinfo=0"
-
-  //     swfobject.embedSWF("http://www.youtube.com/v/"+video_id+
-  //                     settings+and+autoplay+and+controls+and+info,
-  //                     "ytapiplayer", "100%", "356", "8", 
-  //                     null, null, params, atts);
-  // }
-
-  // this.nextVideo = function(){
-
-
-  // }
-
-
-
-  this.searchFirstSongListener = function(){
-    $('#search_first_song').on('submit', function(e){
-      e.preventDefault();
-      self.searchFirstSong($(this));
-    })
-  }
-
-
-  this.searchFirstSong = function(form){
-    var url = form.attr("action")
-        searchQuery = form.find('input').first().val()
-    $.ajax({
-      url: url,
-      type: "POST",
-      data: {search: searchQuery}
-    }).done(function(response){
-      $('#search-results').remove() 
-      $('#search_first_song').append(response)
-      $('#search_first_song').find('input').first().val("")
-      self.clickFirstSongListener();
-      if($('#player').length==1){
-        self.clickSongListener();
+        window.player = new YT.Player('player', {
+          height: '100%',
+          width: '100%',
+          videoId: video,
+          playerVars:
+            {
+              controls: 1,
+              showinfo:0,
+              autoplay: 1
+            },
+          events: {
+            'onReady': onReady,
+            'onStateChange': onStateChange
+          }
+        });    
       }
 
-    })
   }
-
-  this.clickFirstSongListener = function(){
-    $('.video-container').on('click', function(e){
-      e.preventDefault();
-      self.clickFirstSong($(this));
-    })
-  }
-
-  this.clickSongListener = function(){
-    $('.video-container').on('click', function(e){
-      e.preventDefault();
-      self.clickSong($(this));
-    })
-  }
-
-  this.clickFirstSong = function(container){
-    var parameters = container.parent().attr('href').split('?')
-        url = parameters[0]
-        room = url.split('/')[2]
-        videoId = parameters[1].split('=')[1]
-    $.ajax({
-      url: url+ "/theatre",
-      type: "POST",
-      data: {video_id: videoId}
-    }).done(function(response){
-      $('#search-results').remove()
-      $('#search_first_song').prepend(response)
-    })
-
-  }
-
-  this.clickSong = function(container){
-    var parameters = container.parent().attr('href').split('?')
-        url = parameters[0]
-        videoId = parameters[1].split('=')[1]
-    $.ajax({
-      url: url+ '/theatre',
-      type: "POST",
-      data: {video_id: videoId, not_first_song: true}
-    }).done(function(response){
-      $('#search-results').remove()
-      $('#search_first_song').append(response)
-      $('#added_message').fadeOut(3000)
-    })
-
-  }
-
-}
-
-
-
