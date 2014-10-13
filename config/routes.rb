@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     member do
       post 'search'
       post 'theatre'
+      post 'nextvideo'
     end
     resources :tracks
   end
