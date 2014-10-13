@@ -86,7 +86,7 @@ Youtube.Controller = function(){
       $('#search_first_song').append(response)
       $('#search_first_song').find('input').first().val("")
       self.clickFirstSongListener();
-      if($('#myytplayer').length==1){
+      if($('#player').length==1){
         self.clickSongListener();
       }
 
@@ -110,25 +110,27 @@ Youtube.Controller = function(){
   this.clickFirstSong = function(container){
     var parameters = container.parent().attr('href').split('?')
         url = parameters[0]
+        room = url.split('/')[2]
         videoId = parameters[1].split('=')[1]
     $.ajax({
-      url: url,
-      type: "GET",
-      data: {addVideo: videoId}
-    }).done(function(){
-        window.location.href = url
+      url: url+ "/theatre",
+      type: "POST",
+      data: {video_id: videoId}
+    }).done(function(response){
+      $('#search-results').remove()
+      $('#search_first_song').prepend(response)
     })
 
   }
 
   this.clickSong = function(container){
     var parameters = container.parent().attr('href').split('?')
-        url = $('#search_first_song').attr('action')
+        url = parameters[0]
         videoId = parameters[1].split('=')[1]
     $.ajax({
-      url: url,
+      url: url+ '/theatre',
       type: "POST",
-      data: {addVideo: videoId}
+      data: {video_id: videoId, not_first_song: true}
     }).done(function(response){
       $('#search-results').remove()
       $('#search_first_song').append(response)
