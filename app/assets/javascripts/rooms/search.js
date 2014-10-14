@@ -43,8 +43,31 @@ Search.Controller = function(){
   this.clickFirstSongListener = function(){
     $('.video-container').on('click', function(e){
       e.preventDefault();
-      self.clickFirstSong($(this));
+      if(window.location.pathname.split('/')[3]=='guest'){
+        self.guestClick($(this));
+      }
+      else{
+        self.clickFirstSong($(this));
+      }
     })
+  }
+
+  this.guestClick = function(container){
+    var parameters = container.parent().attr('href').split('?')
+        url = parameters[0]
+        room = url.split('/')[2]
+        videoId = parameters[1].split('=')[1]
+
+    $.ajax({
+      url: url+ "/guestsearch",
+      type: "POST",
+      data: {video_id: videoId}
+    }).done(function(response){
+      $('#search-results').remove()
+      $('#search_first_song').append(response)
+      $('#added_message').fadeOut(3000)
+    })
+
   }
 
   this.clickSongListener = function(){
