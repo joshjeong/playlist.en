@@ -1,0 +1,23 @@
+#index-page {
+  width: 100%;
+  padding: 15%; }
+  #index-page h1 {
+    text-align: center; }
+  #index-page #new_room {
+    width: 30rem;
+    margin: auto; }
+    #index-page #new_room #room_name {
+      border: none;
+      width: 70%;
+      padding: 0;
+      text-align: center; }
+    #index-page #new_room #join-btn {
+      border: none;
+      background-color: none;
+      width: 28%; }
+
+#player {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0; }

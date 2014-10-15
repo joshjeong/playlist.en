@@ -1,0 +1,22 @@
+#index-page{
+  width: 100%;
+  padding: 15%;
+  h1{
+    text-align: center;
+  }
+  #new_room{
+    width: 30rem;
+    margin: auto;
+    #room_name{
+      border: none;
+      width: 70%;
+      padding: 0;
+      text-align: center;
+    }
+    #join-btn{
+      border:none;
+      background-color: none;
+      width: 28%;
+    }
+  }
+}

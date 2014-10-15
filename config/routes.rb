@@ -4,6 +4,8 @@ Rails.application.routes.draw do
       post 'search'
       post 'theatre'
       post 'nextvideo'
+      get 'guest'
+      post 'guestsearch'
     end
     resources :tracks
   end

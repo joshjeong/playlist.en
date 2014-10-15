@@ -38,6 +38,8 @@ gem 'pry'
 
 gem 'youtube_it', '~> 2.4.0'
 
+gem 'sass'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

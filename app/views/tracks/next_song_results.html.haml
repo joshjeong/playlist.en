@@ -1,9 +1,0 @@
-/ .row#search-results
-/   - @results.videos.each do |video|
-/     = link_to room_path(id: @room.id, first: video.unique_id ) do
-/       .col-xs-10.col-md-7.video-container
-/         .thumbnail
-/           #video-title
-/             = video.title
-/           #video-image
-/             = image_tag video.thumbnails.first.url
