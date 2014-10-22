@@ -1,4 +1,8 @@
-.div#player
+#theatre-page
+
+  .div#player
+
+  =render partial: "search"
 
 :javascript
   var tag = document.createElement('script');
@@ -29,7 +33,6 @@
         window.player.addEventListener('onStateChange', function(e) {
           var firstVideo = true;
           if ( e.data == 0) {
-            console.log('song has ended')
             window.player.destroy();
             $.ajax({
               url: window.location.pathname+ '/nextvideo',
@@ -47,8 +50,6 @@
       }
 
       playNextVideo =function(video) {
-        console.log('play next video')
-        console.log(video)
 
         window.player = new YT.Player('player', {
           height: '100%',
