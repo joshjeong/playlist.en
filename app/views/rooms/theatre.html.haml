@@ -1,5 +1,5 @@
 #theatre-page
-
+  
   .div#player
 
   =render partial: "search"
@@ -15,6 +15,8 @@
 
     onYouTubeIframeAPIReady =function() {
       window.player = new YT.Player('player', {
+        height: '100%',
+        width: '100%',
         videoId: "#{@next_video}",
         playerVars:
         {
