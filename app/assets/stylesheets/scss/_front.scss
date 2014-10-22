@@ -1,22 +1,44 @@
+$bckgrnd: #030303;
+$comp: white;
+
 #index-page{
-  width: 100%;
-  padding: 15%;
+  height: 10rem;
+  width: 30rem;
+  margin: auto;
+  margin-top: -5rem;
+  top: 45%;
+  margin-left: -15rem;
+  left: 50%;
+  position: absolute;
+  text-align: center;
   h1{
-    text-align: center;
+    font-size: 5rem;
+    position: absolute;
+    margin-left: -10rem;
+    left: 50%;
+    top:5%;
+    color: $comp;
   }
   #new_room{
-    width: 30rem;
-    margin: auto;
+    position: absolute;
+    top:65%;
+    margin-left: -12rem;
+    left: 50%;
+    width: 24rem;
+    display: block;
     #room_name{
-      border: none;
-      width: 70%;
-      padding: 0;
+      color: $bckgrnd;
+      padding: 6px 0;
       text-align: center;
+      border: none;
+      width: 68%;
+      outline: none;
     }
     #join-btn{
-      border:none;
-      background-color: none;
-      width: 28%;
+      color: $comp;
+      border: 3px solid $comp;
+      background-color: $bckgrnd;
+      width: 30%;
     }
   }
 }
