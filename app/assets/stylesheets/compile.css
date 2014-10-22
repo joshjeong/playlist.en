@@ -83,6 +83,10 @@ html {
       background-color: #030303;
       width: 30%; }
 
+#theatre-page #player {
+  position: fixed;
+  top: 0; }
+
 #search-container {
   width: 24rem;
   margin: auto;
