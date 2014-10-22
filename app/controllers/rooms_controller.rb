@@ -6,17 +6,20 @@ class RoomsController < ApplicationController
 
   def create
     room_name = params[:room][:name]
-    session[:queue] = []    
     if Room.find_by(name: room_name)==nil
       Room.create(name: room_name)
       @room = Room.find_by(name: room_name)
       redirect_to room_path(id: @room.name)
     else
-      next_video_obj = @room.tracks.first
-      @next_video = next_video_obj.video_id
-      @room.tracks.delete(next_video_obj)
-      # error if tracks is empty
-      render :theatre
+      @room = Room.find_by(name: room_name)
+      if @room.tracks.empty?
+        redirect_to room_path(id: @room.name)
+      else
+        next_video_obj = @room.tracks.first
+        @next_video = next_video_obj.video_id
+        @room.tracks.delete(next_video_obj)
+        render :theatre
+      end
     end
   end
 
@@ -32,7 +35,7 @@ class RoomsController < ApplicationController
     if params[:search]
       search_query = params[:search]
       @results = @client.videos_by(:query => search_query, :page => 1, :per_page => 10)
-      render :video_result
+      render :video_result, layout:false
     else
       @room.tracks.create(video_id: params[:addVideo])
     end

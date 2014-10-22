@@ -30,7 +30,7 @@ Search.Controller = function(){
       data: {search: searchQuery}
     }).done(function(response){
       $('#search-results').remove() 
-      $('#search_first_song').append(response)
+      $('#search-container').append(response)
       $('#search_first_song').find('input').first().val("")
       self.clickFirstSongListener();
       if($('#player').length==1){
@@ -64,7 +64,7 @@ Search.Controller = function(){
       data: {video_id: videoId}
     }).done(function(response){
       $('#search-results').remove()
-      $('#search_first_song').append(response)
+      $('#search-container').append(response)
       $('#added_message').fadeOut(3000)
     })
 
@@ -88,7 +88,8 @@ Search.Controller = function(){
       data: {video_id: videoId}
     }).done(function(response){
       $('#search-results').remove()
-      $('#search_first_song').prepend(response)
+      $('#search_first_song').remove()
+      $('#search-container').prepend(response)
     })
 
   }
@@ -103,7 +104,7 @@ Search.Controller = function(){
       data: {video_id: videoId, not_first_song: true}
     }).done(function(response){
       $('#search-results').remove()
-      $('#search_first_song').append(response)
+      $('#player').append(response)
       $('#added_message').fadeOut(3000)
     })
 
