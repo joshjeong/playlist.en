@@ -51,7 +51,7 @@ class RoomsController < ApplicationController
       next_video_obj = @room.tracks.first
       @next_video = next_video_obj.video_id
       @room.tracks.delete(next_video_obj)
-      render :theatre
+      render :theatre, layout:false
     end
   end
 

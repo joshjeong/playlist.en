@@ -89,7 +89,7 @@ Search.Controller = function(){
     }).done(function(response){
       $('#search-results').remove()
       $('#search_first_song').remove()
-      $('#search-container').prepend(response)
+      $('body').prepend(response)
     })
 
   }
