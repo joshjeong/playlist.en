@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       post 'nextvideo'
       get 'guest'
       post 'guestsearch'
+      get 'playlist'
     end
     resources :tracks
   end
