@@ -87,9 +87,10 @@ Search.Controller = function(){
       type: "POST",
       data: {video_id: videoId}
     }).done(function(response){
-      $('#search-results').remove()
-      $('#search_first_song').remove()
-      $('body').prepend(response)
+      $('#search-container').remove();
+      $('#search-results').remove();
+      $('#search_first_song').remove();
+      $('body').prepend(response);
     })
 
   }
