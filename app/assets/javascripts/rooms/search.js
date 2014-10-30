@@ -1,29 +1,43 @@
 $(document).ready(function(){
-  ytplayer = new Search.Controller;
-  ytplayer.bindListeners();
+  var sView = new Search.View
+    , sController = new Search.Controller(sView);
+  sController.bindListeners();
 })
 
 
-Search.Controller = function(){
-  var self = this
-      done = false;
-      
+Search.Controller = function(sView){
+  this.view = sView;
+}
 
-  this.bindListeners = function(){
+Search.Controller.prototype = {
+  bindListeners: function(){
     this.searchFirstSongListener();
-  }
+    this.cancelBtnListener();
+  },
 
-  this.searchFirstSongListener = function(){
+  searchFirstSongListener: function(){
+    var self = this;
     $('#search_first_song').on('submit', function(e){
       e.preventDefault();
       self.searchFirstSong($(this));
     })
-  }
+  },
 
+  cancelBtnListener: function(){
+    var self = this;
+    $('#cancel-btn').on('click', function(e){
+      self.cancelBtn();
+    });
+  },
 
-  this.searchFirstSong = function(form){
-    var url = form.attr("action")
-        searchQuery = form.find('input').first().val()
+  cancelBtn: function(){
+    this.view.hideSearch();
+  },
+
+  searchFirstSong: function(form){
+    var self = this
+      , url = form.attr("action")
+      , searchQuery = form.find('input').first().val();
     $.ajax({
       url: url,
       type: "POST",
@@ -38,9 +52,10 @@ Search.Controller = function(){
       }
 
     })
-  }
+  },
 
-  this.clickFirstSongListener = function(){
+  clickFirstSongListener: function(){
+    var self = this;
     $('.video-container').on('click', function(e){
       e.preventDefault();
       if(window.location.pathname.split('/')[3]=='guest'){
@@ -50,9 +65,9 @@ Search.Controller = function(){
         self.clickFirstSong($(this));
       }
     })
-  }
+  },
 
-  this.guestClick = function(container){
+  guestClick: function(container){
     var parameters = container.parent().attr('href').split('?')
         url = parameters[0]
         room = url.split('/')[2]
@@ -67,17 +82,17 @@ Search.Controller = function(){
       $('#search-container').append(response)
       $('#added_message').fadeOut(3000)
     })
+  },
 
-  }
-
-  this.clickSongListener = function(){
+  clickSongListener: function(){
+    var self = this;
     $('.video-container').on('click', function(e){
       e.preventDefault();
       self.clickSong($(this));
     })
-  }
+  },
 
-  this.clickFirstSong = function(container){
+  clickFirstSong: function(container){
     var parameters = container.parent().attr('href').split('?')
         url = parameters[0]
         room = url.split('/')[2]
@@ -91,11 +106,11 @@ Search.Controller = function(){
       $('#search-results').remove();
       $('#search_first_song').remove();
       $('body').prepend(response);
+      $('#search-container').css('display', 'none')
     })
+  },
 
-  }
-
-  this.clickSong = function(container){
+  clickSong: function(container){
     var parameters = container.parent().attr('href').split('?')
         url = parameters[0]
         videoId = parameters[1].split('=')[1]
@@ -108,10 +123,20 @@ Search.Controller = function(){
       $('#player').append(response)
       $('#added_message').fadeOut(3000)
     })
-
   }
-
 }
 
+Search.View = function(){}
+
+Search.View.prototype = {
+  showSearch: function(){
+    $('#search-container').fadeIn(2000);
+    $('#cancel-btn').fadeIn(2000);
+  },
+
+  hideSearch: function(){
+    $('#search-container').fadeOut(2000);
+  }
+}
 
 
