@@ -86,6 +86,12 @@ html {
 #theatre-page #player {
   position: fixed;
   top: 0; }
+#theatre-page .btn {
+  color: white;
+  position: fixed;
+  top: 0; }
+#theatre-page #search-btn {
+  left: 2rem; }
 
 #search-container {
   width: 24rem;
@@ -116,27 +122,34 @@ html {
       width: 15rem;
       right: 0;
       text-align: center; }
-  #search-container #search_first_song ::-webkit-input-placeholder::before {
-    font-family: fontAwesome;
-    content: '\f002  ';
-    color: black; }
-  #search-container #search_first_song ::-moz-placeholder::before {
-    font-family: fontAwesome;
-    content: '\f002  ';
-    color: black; }
-  #search-container #search_first_song :-ms-input-placeholder::before {
-    font-family: fontAwesome;
-    content: '\f002  ';
-    color: black; }
-  #search-container #search_first_song input:-moz-placeholder::before {
-    font-family: fontAwesome;
-    content: '\f002  ';
-    color: black; }
-  #search-container #search_first_song input {
-    padding: 6px 0;
-    position: relative;
-    width: 100%;
-    margin: auto;
-    border: none;
-    text-align: center;
-    outline: none; }
+  #search-container #search_first_song {
+    position: relative; }
+    #search-container #search_first_song ::-webkit-input-placeholder::before {
+      font-family: fontAwesome;
+      content: '\f002  ';
+      color: black; }
+    #search-container #search_first_song ::-moz-placeholder::before {
+      font-family: fontAwesome;
+      content: '\f002  ';
+      color: black; }
+    #search-container #search_first_song :-ms-input-placeholder::before {
+      font-family: fontAwesome;
+      content: '\f002  ';
+      color: black; }
+    #search-container #search_first_song input:-moz-placeholder::before {
+      font-family: fontAwesome;
+      content: '\f002  ';
+      color: black; }
+    #search-container #search_first_song input {
+      padding: 6px 0;
+      position: relative;
+      width: 100%;
+      margin: auto;
+      border: none;
+      text-align: center;
+      outline: none; }
+    #search-container #search_first_song #cancel-btn {
+      position: absolute;
+      top: 0.3rem;
+      right: 1rem;
+      display: none; }
