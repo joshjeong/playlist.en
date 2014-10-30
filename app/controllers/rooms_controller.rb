@@ -48,7 +48,7 @@ class RoomsController < ApplicationController
     @room.tracks.create(video_id: params[:video_id])
     @new_video = @room.tracks.find_by('video_id=?', params[:video_id])
     if params[:not_first_song]
-      render :song_added
+      render :song_added, layout:false
     else
       next_video_obj = @room.tracks.first
       @next_video = next_video_obj.video_id
@@ -71,7 +71,7 @@ class RoomsController < ApplicationController
   def guestsearch
     @room = Room.find_by('name=?', params[:id])
     @room.tracks.create(video_id: params[:video_id])
-    render :song_added
+    render :song_added, layout:false
   end
 
   def playlist
@@ -81,7 +81,7 @@ class RoomsController < ApplicationController
     @room.tracks.each do |video|
       @playlist << @client.video_by(video.video_id).author.name
     end
-    render :playlist, layout: false
+    render :playlist, layout:false
   end
 
 end
