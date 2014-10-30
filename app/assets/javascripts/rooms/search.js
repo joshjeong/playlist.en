@@ -46,11 +46,12 @@ Search.Controller.prototype = {
       $('#search-results').remove() 
       $('#search-container').append(response)
       $('#search_first_song').find('input').first().val("")
-      self.clickFirstSongListener();
       if($('#player').length==1){
         self.clickSongListener();
       }
-
+      else{
+        self.clickFirstSongListener();
+      }
     })
   },
 
