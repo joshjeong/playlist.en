@@ -1,7 +1,7 @@
 class RoomsController < ApplicationController
   skip_before_filter  :verify_authenticity_token
-
   include RoomHelper
+
   def index
     @room = Room.new
   end
@@ -76,8 +76,12 @@ class RoomsController < ApplicationController
 
   def playlist
     @room = Room.find_by('name=?', params[:id])
-    @playlist = @room.tracks
-    render :playlist
+    get_client
+    @playlist = []
+    @room.tracks.each do |video|
+      @playlist << @client.video_by(video.video_id).author.name
+    end
+    render :playlist, layout: false
   end
 
 end

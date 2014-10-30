@@ -36,6 +36,7 @@ $comp: white;
     }
   };
   #search_first_song{
+    position: relative;
     ::-webkit-input-placeholder::before{ 
       font-family: fontAwesome; 
       content:'\f002  '; 
@@ -64,6 +65,12 @@ $comp: white;
       border: none;
       text-align: center;
       outline: none;
+    }
+    #cancel-btn{
+      position: absolute;
+      top: 0.3rem;
+      right: 1rem;
+      display: none;
     }
   }
 }

@@ -3,8 +3,14 @@
     position: fixed;
     top: 0;
   }
-  #playlist-btn{
+  .btn{
     color: white;
-    position: absolute;
+    position: fixed;
+    top: 0;
+  }
+  #playlist-btn{
+  }
+  #search-btn{
+    left: 2rem;
   }
 }

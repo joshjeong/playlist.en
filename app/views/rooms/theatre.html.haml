@@ -1,14 +1,19 @@
 #theatre-page
   
   .div#player
-  .fa.fa-list-ol#playlist-btn
-  
+  .btn.fa.fa-list-ol#playlist-btn
+  .btn.fa.fa-search#search-btn
+
+
   =render partial: "search"
 
 :javascript
   $(document).ready(function(){
-    ytplayer = new Search.Controller;
-    ytplayer.bindListeners();
+    var sView = new Search.View
+      , sController = new Search.Controller(sView)
+      , tController = new Theatre.Controller(sView);
+    sController.bindListeners();
+    tController.bindListeners();
   })
 
   var tag = document.createElement('script');
