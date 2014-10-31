@@ -1,5 +1,4 @@
-#playlist-container
-  %ul  
-    - @playlist.each do |video_title|
-      %li
-        = video_title
+%ul
+  -@playlist.each do |title|
+    %li
+      = title
