@@ -3,17 +3,18 @@
   .div#player
   .btn.fa.fa-list-ol#playlist-btn
   .btn.fa.fa-search#search-btn
-
+  .fa.fa-times#close-list-btn
+  #playlist-container
 
   =render partial: "search"
 
 :javascript
   $(document).ready(function(){
-    var sView = new Search.View
-      , sController = new Search.Controller(sView)
-      , tController = new Theatre.Controller(sView);
+    var sController = new Search.Controller(Search.View)
+      , tController = new Theatre.Controller(Search.View, Theatre.View);
     sController.bindListeners();
     tController.bindListeners();
+    tController.getPlaylist();
   })
 
   var tag = document.createElement('script');
