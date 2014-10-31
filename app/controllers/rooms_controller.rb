@@ -74,14 +74,21 @@ class RoomsController < ApplicationController
     render :song_added, layout:false
   end
 
-  def playlist
+  def get_playlist
     @room = Room.find_by('name=?', params[:id])
     get_client
     @playlist = []
     @room.tracks.each do |video|
-      @playlist << @client.video_by(video.video_id).author.name
+      @playlist << @client.video_by(video.video_id).title
     end
     render :playlist, layout:false
+  end
+
+  def add_to_queue
+    @room = Room.find_by('name=?', params[:id])
+    get_client
+    @video_title = @client.video_by(params[:video_id]).title
+    render :add_to_queue, layout:false
   end
 
 end
