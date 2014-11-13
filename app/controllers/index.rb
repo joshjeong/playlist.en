@@ -1,6 +1,6 @@
-after do
-    ActiveRecord::Base.connection.close
-end
+# after do
+#     ActiveRecord::Base.connection.close
+# end
 
 get '/' do
 	erb :index
@@ -11,17 +11,17 @@ post '/room' do
 	if Room.where('name = ?', params[:name]).empty?
 		# if room does not exist, create a room and playlist, join as admin
 		get_client
-		@playlist = @client.add_playlist(:title => params[:name], :description => "Music Room")
-		@playlist_id = @playlist.playlist_id
+		# @playlist = @client.add_playlist(:title => params[:name], :description => "Music Room")
+		# @playlist_id = @playlist.playlist_id
 		@new_room = Room.create(name: params[:name])
 		session[:name] = params[:name]
-		p 'Room Name:'
-		p session[:name]
+		# p 'Room Name:'
+		# p session[:name]
 		current_room
 		redirect '/first_search'
 	else
 		@name = Room.where('name = ?', params[:name]).first
-		p @name
+		# p @name
 		host = 'guest'
 		redirect "/room/#{@name.name}/#{host}"
 	end
@@ -44,7 +44,7 @@ get '/room/:video_id/:host' do
 	elsif params[:host] == 'guest'
 		current_room
 		get_client
-		p @current_room
+		# p @current_room
 		@playlist_videos = @current_room.first.songs
 		# @playlist_videos = @client.playlist(params[:playlist_id]).videos
 		@host = false
@@ -73,11 +73,11 @@ get '/first_search/results/:video_id' do
 	current_room
 	# @playlist_id = session[:playlist_id]
 	# @client.add_video_to_playlist(@playlist_id, params[:video_id])	
-	p '----------------'
-	p 'before first number of songs'
+	# p '----------------'
+	# p 'before first number of songs'
 	@current_room.first.songs.create(video_id: params[:video_id])
-	p '----------------'
-	p 'after add number of songs'
+	# p '----------------'
+	# p 'after add number of songs'
 	session[:video_id] = params[:video_id]
 	@video_id = params[:video_id]
 	redirect "/room/#{@video_id}/host"
@@ -129,7 +129,7 @@ post '/playlist' do
 		content_type 'json'
 		return {queue: next_song.video_id}.to_json
 	else
-	  p "nothing in playlist"
+	  # p "nothing in playlist"
 	end
 end
 
