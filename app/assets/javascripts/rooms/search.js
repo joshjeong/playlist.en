@@ -4,8 +4,8 @@ $(document).ready(function(){
 })
 
 
-Search.Controller = function(sView){
-  this.view = new sView;
+Search.Controller = function(view){
+  this.view = new view;
 }
 
 Search.Controller.prototype = {
@@ -34,15 +34,16 @@ Search.Controller.prototype = {
   },
 
   searchFirstSong: function(form){
-    var self = this
-      , url = form.attr("action")
-      , searchQuery = form.find('input').first().val();
+    var self = this,
+      url = form.attr("action"),
+      searchQuery = form.find('input').first().val();
 
     $.ajax({
       url: url,
       type: "POST",
       data: {search: searchQuery}
     }).done(function(response){
+      self.view.hideDoge();
       self.view.removeSearchResults();
       self.view.hideSearchResults();
       $('#search-container').append(response)
@@ -70,10 +71,10 @@ Search.Controller.prototype = {
   },
 
   guestClick: function(container){
-    var parameters = container.parent().attr('href').split('?')
-        url = parameters[0]
-        room = url.split('/')[2]
-        videoId = parameters[1].split('=')[1]
+    var parameters = container.parent().attr('href').split('?'),
+        url = parameters[0],
+        room = url.split('/')[2],
+        videoId = parameters[1].split('=')[1],
         self = this
 
     $.ajax({
@@ -97,10 +98,10 @@ Search.Controller.prototype = {
   },
 
   clickFirstSong: function(container){
-    var parameters = container.parent().attr('href').split('?')
-        url = parameters[0]
-        room = url.split('/')[2]
-        videoId = parameters[1].split('=')[1]
+    var parameters = container.parent().attr('href').split('?'),
+        url = parameters[0],
+        room = url.split('/')[2],
+        videoId = parameters[1].split('=')[1],
         self = this
 
     $.ajax({
@@ -108,18 +109,19 @@ Search.Controller.prototype = {
       type: "POST",
       data: {video_id: videoId}
     }).done(function(response){
-      self.view.removeSearchContainer();
+      self.view.hideSearchContainer();
       self.view.hideSearchResults();
       self.view.removeSearchForm();
       $('body').prepend(response);
-      self.sView.hideSearchContainer();
+      self.view.hideSearchContainer();
+      self.view.hideDoge();
     })
   },
 
   clickSong: function(container){
-    var parameters = container.parent().attr('href').split('?')
-        url = parameters.shift()
-        videoId = parameters.shift().split('=')[1]
+    var parameters = container.parent().attr('href').split('?'),
+        url = parameters.shift(),
+        videoId = parameters.shift().split('=')[1],
         self = this
     $.ajax({
       url: url+ '/theatre',
@@ -129,16 +131,16 @@ Search.Controller.prototype = {
       self.view.hideSearchResults();
       setTimeout(function(){
         $('#player').append(response)
-        self.view.removeSearchContainer();
+        self.view.hideSearchContainer();
       }, 1500);
       // $('#added_message').fadeOut(3000)
     })
   },
 
   addToPlaylist: function(container){
-    var parameters = container.parent().attr('href').split('?')
-        url = parameters.shift()
-        videoId = parameters.shift().split('=')[1]
+    var parameters = container.parent().attr('href').split('?'),
+        url = parameters.shift(),
+        videoId = parameters.shift().split('=')[1],
         self = this
     $.ajax({
       url: url+ '/add_to_queue',
@@ -171,8 +173,8 @@ Search.View.prototype = {
     $('#search-results').slideUp(1000)
   },
 
-  removeSearchContainer: function(){
-    $('#search-container').remove()
+  hideSearchContainer: function(){
+    $('#search-container').css('display', 'none');
   },
 
   removeSearchForm: function(){
@@ -180,8 +182,13 @@ Search.View.prototype = {
   },
 
   hideSearchContainer: function(){
-    $('#search-container').css('display', 'none')
+    $('#search-container').css('display', 'none');
+  },
+
+  hideDoge: function(){
+    $('#updog').remove()
   }
+
 }
 
 

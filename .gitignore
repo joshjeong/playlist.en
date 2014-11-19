@@ -26,3 +26,5 @@ config/secrets.yml
 
 #api key- you will never get this (*borat voice)
 .env
+
+/.sass-cache
