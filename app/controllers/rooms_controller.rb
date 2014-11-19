@@ -10,10 +10,12 @@ class RoomsController < ApplicationController
     room_name = params[:room][:name]
     if Room.find_by(name: room_name)==nil
       Room.create(name: room_name)
+      session[:host] = true
       @room = Room.find_by(name: room_name)
       redirect_to room_path(id: @room.name)
     else
       @room = Room.find_by(name: room_name)
+      session[:host] = false
       if @room.tracks.empty?
         redirect_to room_path(id: @room.name)
       else
@@ -26,7 +28,7 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find_by('name=?', "#{params[:id]}")
+    @room = Room.find_by(name: params[:id])
     @video = params[:addVideo] 
     render :show
   end
@@ -35,8 +37,7 @@ class RoomsController < ApplicationController
     get_client
     @room = Room.find_by('name=?', params[:id])
     if params[:search]
-      search_query = params[:search]
-      @results = @client.videos_by(:query => search_query, :page => 1, :per_page => 10)
+      @results = get_videos(params[:search])
       render :video_result, layout:false
     else
       @room.tracks.create(video_id: params[:addVideo])
@@ -46,7 +47,7 @@ class RoomsController < ApplicationController
   def theatre
     @room = Room.find_by('name=?', params[:id])
     @room.tracks.create(video_id: params[:video_id])
-    @new_video = @room.tracks.find_by('video_id=?', params[:video_id])
+    @new_video = @room.tracks.find_by(video_id: params[:video_id])
     if params[:not_first_song]
       render :song_added, layout:false
     else
@@ -79,7 +80,7 @@ class RoomsController < ApplicationController
     get_client
     @playlist = []
     @room.tracks.each do |video|
-      @playlist << @client.video_by(video.video_id).title
+      @playlist << get_title(video.video_id)
     end
     render :playlist, layout:false
   end
@@ -87,7 +88,7 @@ class RoomsController < ApplicationController
   def add_to_queue
     @room = Room.find_by('name=?', params[:id])
     get_client
-    @video_title = @client.video_by(params[:video_id]).title
+    @video_title = get_title(params[:video_id])
     render :add_to_queue, layout:false
   end
 
