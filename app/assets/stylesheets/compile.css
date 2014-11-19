@@ -43,8 +43,32 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-html {
-  background-color: #030303; }
+body {
+  background-color: white; }
+
+#crowd-img-front {
+  background-image: url("/assets/crowd2.png");
+  z-index: 2;
+  -webkit-animation: bounce 3s infinite;
+  -moz-animation: bounce 3s infinite;
+  -ms-animation: bounce 3s infinite;
+  animation: bounce 3s infinite; }
+
+#crowd-img-back {
+  background-image: url("/assets/crowd1.png");
+  z-index: 1;
+  -webkit-animation: bounce 6s infinite;
+  -moz-animation: bounce 6s infinite;
+  -ms-animation: bounce 6s infinite;
+  animation: bounce 6s infinite; }
+
+.crowd {
+  position: fixed;
+  bottom: 0;
+  background-size: cover;
+  height: 40%;
+  width: 100%;
+  background-repeat: no-repeat; }
 
 #index-page {
   height: 10rem;
@@ -62,7 +86,7 @@ html {
     margin-left: -10rem;
     left: 50%;
     top: 5%;
-    color: white; }
+    color: black; }
   #index-page #new_room {
     position: absolute;
     top: 65%;
@@ -71,17 +95,71 @@ html {
     width: 24rem;
     display: block; }
     #index-page #new_room #room_name {
-      color: #030303;
+      color: white;
       padding: 6px 0;
       text-align: center;
-      border: none;
-      width: 68%;
+      border: 3px solid black;
+      width: 65%;
       outline: none; }
     #index-page #new_room #join-btn {
-      color: white;
-      border: 3px solid white;
-      background-color: #030303;
+      color: black;
+      border: 3px solid black;
+      background-color: white;
+      padding-top: 0.4rem;
+      padding-bottom: 0.4rem;
       width: 30%; }
+
+@-webkit-keyframes bounce {
+  0%, 100% {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0); }
+
+  50% {
+    -webkit-transform: translateY(30px);
+    -moz-transform: translateY(30px);
+    -ms-transform: translateY(30px);
+    transform: translateY(30px); } }
+
+@-moz-keyframes bounce {
+  0%, 100% {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0); }
+
+  50% {
+    -webkit-transform: translateY(30px);
+    -moz-transform: translateY(30px);
+    -ms-transform: translateY(30px);
+    transform: translateY(30px); } }
+
+@-ms-keyframes bounce {
+  0%, 100% {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0); }
+
+  50% {
+    -webkit-transform: translateY(30px);
+    -moz-transform: translateY(30px);
+    -ms-transform: translateY(30px);
+    transform: translateY(30px); } }
+
+@keyframes bounce {
+  0%, 100% {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0); }
+
+  50% {
+    -webkit-transform: translateY(30px);
+    -moz-transform: translateY(30px);
+    -ms-transform: translateY(30px);
+    transform: translateY(30px); } }
 
 #theatre-page #player {
   position: fixed;
