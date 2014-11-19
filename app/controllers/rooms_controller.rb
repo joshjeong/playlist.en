@@ -17,7 +17,7 @@ class RoomsController < ApplicationController
       @room = Room.find_by(name: room_name)
       session[:host] = false
       if @room.tracks.empty?
-        redirect_to room_path(id: @room.name)
+        redirect_to guest_room_path(id: @room.name)
       else
         next_video_obj = @room.tracks.first
         @next_video = next_video_obj.video_id
