@@ -11,7 +11,7 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+time, mark, audio, video, input {
   margin: 0;
   padding: 0;
   border: 0;
@@ -44,7 +44,8 @@ table {
   border-spacing: 0; }
 
 body {
-  background-color: white; }
+  background-color: white;
+  font-family: 'Lato', sans-serif; }
 
 #crowd-img-front {
   background-image: url("/assets/crowd2.png");
@@ -82,6 +83,7 @@ body {
   text-align: center; }
   #index-page h1 {
     font-size: 5rem;
+    font-family: 'Lobster', cursive;
     position: absolute;
     margin-left: -10rem;
     left: 50%;
@@ -95,8 +97,8 @@ body {
     width: 24rem;
     display: block; }
     #index-page #new_room #room_name {
-      color: white;
-      padding: 6px 0;
+      color: black;
+      padding: 0.4rem 0;
       text-align: center;
       border: 3px solid black;
       width: 65%;
@@ -105,8 +107,7 @@ body {
       color: black;
       border: 3px solid black;
       background-color: white;
-      padding-top: 0.4rem;
-      padding-bottom: 0.4rem;
+      padding: 0.5rem 0;
       width: 30%; }
 
 @-webkit-keyframes bounce {
@@ -171,12 +172,29 @@ body {
 #theatre-page #search-btn {
   left: 2rem; }
 
+#updog {
+  position: absolute;
+  top: 15rem;
+  left: -2.5rem;
+  margin-left: 50%;
+  background-image: url("/assets/updog.png");
+  background-size: contain;
+  height: 5rem;
+  width: 5rem;
+  background-repeat: no-repeat;
+  -webkit-animation: gig 6s infinite;
+  -moz-animation: gig 6s infinite;
+  -ms-animation: gig 6s infinite;
+  animation: gig 6s infinite; }
+
 #search-container {
   width: 24rem;
   margin: auto;
   margin-top: 2rem; }
   #search-container #search-results {
-    border: 4px solid white;
+    border: 3px solid #030303;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-top: -3px;
     width: 24rem;
     position: absolute;
     left: -12rem;
@@ -195,7 +213,7 @@ body {
       height: 7rem;
       width: 7rem; }
     #search-container .video-container .video-title-container {
-      color: white;
+      color: #030303;
       position: absolute;
       width: 15rem;
       right: 0;
@@ -225,12 +243,26 @@ body {
       margin: auto;
       border: none;
       text-align: center;
-      outline: none; }
+      outline: none;
+      border: 3px solid #030303; }
     #search-container #search_first_song #cancel-btn {
       position: absolute;
       top: 0.3rem;
       right: 1rem;
       display: none; }
+
+@-webkit-keyframes gig {
+  0%, 100% {
+    -webkit-transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    transform: rotate(30deg); }
+
+  50% {
+    -webkit-transform: rotate(-30deg);
+    -moz-transform: rotate(-30deg);
+    -ms-transform: rotate(-30deg);
+    transform: rotate(-30deg); } }
 
 #close-list-btn {
   visibility: hidden;
