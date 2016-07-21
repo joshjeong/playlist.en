@@ -1,8 +1,8 @@
 #search-results
-  - @results.videos.each do |video|
-    = link_to room_path(id: @room.name, first: video.unique_id ) do
+  - @results.each do |video|
+    = link_to room_path(id: @room.name, first: video["id"]["videoId"] ) do
       .video-container
         .video-image-container
-          = image_tag video.thumbnails.first.url, class: 'video-image'
+          = image_tag video["snippet"]["thumbnails"]["default"]["url"], class: 'video-image'
         %p.video-title-container
-          = video.title
+          = video["snippet"]["title"]

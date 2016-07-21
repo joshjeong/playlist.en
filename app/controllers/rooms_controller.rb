@@ -34,10 +34,11 @@ class RoomsController < ApplicationController
   end
 
   def search
-    get_client
+    set_client
     @room = Room.find_by('name=?', params[:id])
     if params[:search]
       @results = get_videos(params[:search])
+
       render :video_result, layout:false
     else
       @room.tracks.create(video_id: params[:addVideo])
@@ -60,13 +61,14 @@ class RoomsController < ApplicationController
 
   def nextvideo
     @room = Room.find_by('name=?', params[:id])
-    next_video_obj = @room.tracks.first
-    @room.tracks.delete(next_video_obj)
-    @next_video = next_video_obj.video_id
-    render json: {video: @next_video}
-  end
-
-  def guest
+    if @room.tracks != []
+      next_video_obj = @room.tracks.first
+      @room.tracks.delete(next_video_obj)
+      @next_video = next_video_obj.video_id
+      render json: {video: @next_video}
+    else
+      redirect_to room_path(id: @room.name)
+    end
   end
 
   def guestsearch
@@ -77,18 +79,17 @@ class RoomsController < ApplicationController
 
   def get_playlist
     @room = Room.find_by('name=?', params[:id])
-    get_client
     @playlist = []
     @room.tracks.each do |video|
-      @playlist << get_title(video.video_id)
+      @playlist << get_title(video["channelId"])
     end
     render :playlist, layout:false
   end
 
   def add_to_queue
     @room = Room.find_by('name=?', params[:id])
-    get_client
     @video_title = get_title(params[:video_id])
+    puts @video_title
     render :add_to_queue, layout:false
   end
 

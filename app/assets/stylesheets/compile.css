@@ -85,7 +85,7 @@ body {
     font-size: 5rem;
     font-family: 'Lobster', cursive;
     position: absolute;
-    margin-left: -10rem;
+    margin-left: -10.5rem;
     left: 50%;
     top: 5%;
     color: black; }
@@ -171,16 +171,18 @@ body {
   top: 0; }
 #theatre-page #search-btn {
   left: 2rem; }
+#theatre-page #skip-btn {
+  left: 4rem; }
 
 #updog {
   position: absolute;
   top: 15rem;
-  left: -2.5rem;
+  left: -7.5rem;
   margin-left: 50%;
   background-image: url("/assets/updog.png");
   background-size: contain;
-  height: 5rem;
-  width: 5rem;
+  height: 15rem;
+  width: 15rem;
   background-repeat: no-repeat;
   -webkit-animation: gig 6s infinite;
   -moz-animation: gig 6s infinite;

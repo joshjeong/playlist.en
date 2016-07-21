@@ -9,6 +9,7 @@ Theatre.Controller.prototype = {
     this.searchBtnListener();
     this.showCloseBtnListener();
     this.closeListListener();
+    this.skipVideoListener();
   },
 
   playlistBtnListener: function(){
@@ -39,6 +40,18 @@ Theatre.Controller.prototype = {
     })
   },
 
+  skipVideoListener: function(){
+    var self = this;
+    $('#skip-btn').on('click', function(){
+      self.skipVideo();
+    })
+  },
+
+  skipVideo: function(){
+    var videoLength = player.getDuration()
+    player.seekTo(videoLength)
+  },
+
   getPlaylist: function(){
     var url = window.location.pathname
         self = this
@@ -46,6 +59,7 @@ Theatre.Controller.prototype = {
       url: url + "/get_playlist",
       type: "GET"
     }).done(function(response){
+      $('#playlist-container').html('')
       $('#playlist-container').append(response)
     })
   },

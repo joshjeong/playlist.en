@@ -3,6 +3,7 @@
   .div#player
   .btn.fa.fa-list-ol#playlist-btn
   .btn.fa.fa-search#search-btn
+  .btn.fa.fa-fast-forward#skip-btn
   .fa.fa-times#close-list-btn
   #playlist-container
 
@@ -32,7 +33,7 @@
         videoId: "#{@next_video}",
         playerVars:
         {
-          controls: 1,
+          controls: 0,
           showinfo: 0,
           autoplay: 1
         },
@@ -64,14 +65,13 @@
       }
 
       playNextVideo =function(video) {
-
         window.player = new YT.Player('player', {
           height: '100%',
           width: '100%',
           videoId: video,
           playerVars:
             {
-              controls: 1,
+              controls: 0,
               showinfo:0,
               autoplay: 1
             },
