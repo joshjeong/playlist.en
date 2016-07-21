@@ -80,5 +80,10 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  config.cache_classes = true
+  config.serve_static_assets = true
+  config.assets.compile = true
+  config.assets.digest = true
+  
   config.secret_key_base = ENV["SECRET_KEY_BASE"]
 end
