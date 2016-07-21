@@ -45,7 +45,7 @@ gem 'spring',        group: :development
 
 gem 'pry'
 
-gem 'google-api-client', '>0.7'
+gem 'google-api-client', '0.8.2', require: 'google/api_client'
 gem 'trollop'
 
 gem 'sass'
