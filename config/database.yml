@@ -15,11 +15,9 @@
 # gem 'pg'
 #
 default: &default
-  adapter: postgresql
-  encoding: unicode
-  # For details on connection pooling, see rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  adapter: sqlite3
   pool: 5
+  timeout: 5000
 
 development:
   <<: *default
@@ -81,5 +79,5 @@ test:
 production:
   <<: *default
   database: playlisten_production
-  username: playlisten
-  password: <%= ENV['PLAYLISTEN_DATABASE_PASSWORD'] %>
+  # username: playlisten
+  # password: <%= ENV['PLAYLISTEN_DATABASE_PASSWORD'] %>
