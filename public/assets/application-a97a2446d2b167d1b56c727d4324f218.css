@@ -1,0 +1,313 @@
+@charset "UTF-8";/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, input {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+body {
+  background-color: white;
+  font-family: 'Lato', sans-serif; }
+
+#crowd-img-front {
+  background-image: url("/assets/crowd2.png");
+  z-index: 2;
+  -webkit-animation: bounce 3s infinite;
+  -moz-animation: bounce 3s infinite;
+  -ms-animation: bounce 3s infinite;
+  animation: bounce 3s infinite; }
+
+#crowd-img-back {
+  background-image: url("/assets/crowd1.png");
+  z-index: 1;
+  -webkit-animation: bounce 6s infinite;
+  -moz-animation: bounce 6s infinite;
+  -ms-animation: bounce 6s infinite;
+  animation: bounce 6s infinite; }
+
+.crowd {
+  position: fixed;
+  bottom: 0;
+  background-size: cover;
+  height: 40%;
+  width: 100%;
+  background-repeat: no-repeat; }
+
+#index-page {
+  height: 10rem;
+  width: 30rem;
+  margin: auto;
+  margin-top: -5rem;
+  top: 45%;
+  margin-left: -15rem;
+  left: 50%;
+  position: absolute;
+  text-align: center; }
+  #index-page h1 {
+    font-size: 5rem;
+    font-family: 'Lobster', cursive;
+    position: absolute;
+    margin-left: -10.5rem;
+    left: 50%;
+    top: 5%;
+    color: black; }
+  #index-page #new_room {
+    position: absolute;
+    top: 65%;
+    margin-left: -12rem;
+    left: 50%;
+    width: 24rem;
+    display: block; }
+    #index-page #new_room #room_name {
+      color: black;
+      padding: 0.4rem 0;
+      text-align: center;
+      border: 3px solid black;
+      width: 65%;
+      outline: none; }
+    #index-page #new_room #join-btn {
+      color: black;
+      border: 3px solid black;
+      background-color: white;
+      padding: 0.5rem 0;
+      width: 30%; }
+
+@-webkit-keyframes bounce {
+  0%, 100% {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0); }
+
+  50% {
+    -webkit-transform: translateY(30px);
+    -moz-transform: translateY(30px);
+    -ms-transform: translateY(30px);
+    transform: translateY(30px); } }
+
+@-moz-keyframes bounce {
+  0%, 100% {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0); }
+
+  50% {
+    -webkit-transform: translateY(30px);
+    -moz-transform: translateY(30px);
+    -ms-transform: translateY(30px);
+    transform: translateY(30px); } }
+
+@-ms-keyframes bounce {
+  0%, 100% {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0); }
+
+  50% {
+    -webkit-transform: translateY(30px);
+    -moz-transform: translateY(30px);
+    -ms-transform: translateY(30px);
+    transform: translateY(30px); } }
+
+@keyframes bounce {
+  0%, 100% {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0); }
+
+  50% {
+    -webkit-transform: translateY(30px);
+    -moz-transform: translateY(30px);
+    -ms-transform: translateY(30px);
+    transform: translateY(30px); } }
+
+#theatre-page #player {
+  position: fixed;
+  top: 0; }
+#theatre-page .btn {
+  color: white;
+  position: fixed;
+  top: 0; }
+#theatre-page #search-btn {
+  left: 2rem; }
+#theatre-page #skip-btn {
+  left: 4rem; }
+
+#updog {
+  position: absolute;
+  top: 15rem;
+  left: -7.5rem;
+  margin-left: 50%;
+  background-image: url("/assets/updog.png");
+  background-size: contain;
+  height: 15rem;
+  width: 15rem;
+  background-repeat: no-repeat;
+  -webkit-animation: gig 6s infinite;
+  -moz-animation: gig 6s infinite;
+  -ms-animation: gig 6s infinite;
+  animation: gig 6s infinite; }
+
+#search-container {
+  width: 24rem;
+  margin: auto;
+  margin-top: 2rem; }
+  #search-container #search-results {
+    border: 3px solid #030303;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-top: -3px;
+    width: 24rem;
+    position: absolute;
+    left: -12rem;
+    margin-left: 50%;
+    height: 30rem;
+    overflow: scroll; }
+  #search-container .video-container {
+    border-bottom: 1px solid #343434;
+    position: relative;
+    height: 9rem;
+    padding: 1rem; }
+    #search-container .video-container a {
+      text-decoration: none; }
+    #search-container .video-container .video-image {
+      position: absolute;
+      height: 7rem;
+      width: 7rem; }
+    #search-container .video-container .video-title-container {
+      color: #030303;
+      position: absolute;
+      width: 15rem;
+      right: 0;
+      text-align: center; }
+  #search-container #search_first_song {
+    position: relative; }
+    #search-container #search_first_song ::-webkit-input-placeholder::before {
+      font-family: fontAwesome;
+      content: '\f002  ';
+      color: black; }
+    #search-container #search_first_song ::-moz-placeholder::before {
+      font-family: fontAwesome;
+      content: '\f002  ';
+      color: black; }
+    #search-container #search_first_song :-ms-input-placeholder::before {
+      font-family: fontAwesome;
+      content: '\f002  ';
+      color: black; }
+    #search-container #search_first_song input:-moz-placeholder::before {
+      font-family: fontAwesome;
+      content: '\f002  ';
+      color: black; }
+    #search-container #search_first_song input {
+      padding: 6px 0;
+      position: relative;
+      width: 100%;
+      margin: auto;
+      border: none;
+      text-align: center;
+      outline: none;
+      border: 3px solid #030303; }
+    #search-container #search_first_song #cancel-btn {
+      position: absolute;
+      top: 0.3rem;
+      right: 1rem;
+      display: none; }
+
+@-webkit-keyframes gig {
+  0%, 100% {
+    -webkit-transform: rotate(30deg);
+    -moz-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    transform: rotate(30deg); }
+
+  50% {
+    -webkit-transform: rotate(-30deg);
+    -moz-transform: rotate(-30deg);
+    -ms-transform: rotate(-30deg);
+    transform: rotate(-30deg); } }
+
+#close-list-btn {
+  visibility: hidden;
+  z-index: 1;
+  background-color: black;
+  height: 1.5rem;
+  width: 1.5rem;
+  text-align: center;
+  border-radius: 50%;
+  line-height: 1.5rem;
+  position: fixed;
+  top: 0;
+  right: 19.2rem;
+  color: white; }
+
+#playlist-container {
+  visibility: hidden;
+  width: 20rem;
+  border: 2px solid black;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  right: 0;
+  max-height: 100%;
+  overflow: scroll;
+  padding: 2px;
+  background-color: rgba(255, 255, 255, 0.8); }
+  #playlist-container ul li {
+    padding: 10px;
+    border-bottom: 1px solid gray; }
