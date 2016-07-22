@@ -4,6 +4,7 @@ class RoomsController < ApplicationController
 
   def index
     @room = Room.new
+    puts "bitch"
   end
 
   def create
