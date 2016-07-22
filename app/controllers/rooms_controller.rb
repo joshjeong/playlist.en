@@ -8,17 +8,24 @@ class RoomsController < ApplicationController
 
   def create
     room_name = params[:room][:name]
-    if Room.find_by(name: room_name)==nil
+    puts "Room name is #{room_name}"
+    if !Room.find_by(name: room_name).present?
       Room.create(name: room_name)
       session[:host] = true
       @room = Room.find_by(name: room_name)
+      puts "Creating room"
+      puts "Room is #{@room}"
       redirect_to room_path(id: @room.name)
     else
+      puts "Found room"
       @room = Room.find_by(name: room_name)
+      puts "Room is #{@room}"
       session[:host] = false
       if @room.tracks.empty?
+        puts "No tracks"
         redirect_to guest_room_path(id: @room.name)
       else
+        puts "Play song"
         next_video_obj = @room.tracks.first
         @next_video = next_video_obj.video_id
         @room.tracks.delete(next_video_obj)
@@ -47,8 +54,10 @@ class RoomsController < ApplicationController
 
   def theatre
     @room = Room.find_by('name=?', params[:id])
+    puts "Room is #{@room}"
     @room.tracks.create(video_id: params[:video_id])
     @new_video = @room.tracks.find_by(video_id: params[:video_id])
+    puts "New video is #{@new_video}"
     if params[:not_first_song]
       render :song_added, layout:false
     else
